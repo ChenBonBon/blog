@@ -29,7 +29,7 @@
             <% }) %>
         </div>
         <div class="friend-links">
-            <% Object.keys(theme.card.friend_links).forEach(function(key){ %>
+            <% theme.card.friend_links && Object.keys(theme.card.friend_links).forEach(function(key){ %>
             <div class="friend-link">
                 <a href="<%- theme.card.friend_links[key] %>">
                     <%- key %>

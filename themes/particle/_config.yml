@@ -5,7 +5,7 @@
 language: zh
 
 # avatar image url
-head_img: images/avatar.png
+head_img: images/avatar.jpeg
 
 # home page head info block
 head_block_enable: true
@@ -55,7 +55,7 @@ menu:
 # side info card
 card:
   enable: true
-  description: ["正しさなんてもの", "人のモノサシによって変わる"]
+  description: [""]
   icon_links:
     github:
       icon:
@@ -63,17 +63,10 @@ card:
         name: github
         theme: filled
         src:
-      link: https://github.com/korilin
-    twitter:
-      icon:
-        type: antd-icon
-        name: twitter
-        theme:
-        src:
-      link: https://twitter.com/korilin_dev
-  friend_links:
-    英文技术博客: https://en.korilin.com
-    日语记录博客: https://jp.korilin.com
+      link: https://github.com/ChenBonBon
+  # friend_links:
+  #   英文技术博客: https://en.korilin.com
+  #   日语记录博客: https://jp.korilin.com
 
 # footer info
 footer:
@@ -81,7 +74,7 @@ footer:
   # Customize the server domain name ICP
   ICP:
     enable: false
-    code: 
+    code:
 
 # Gitalk
 # https://github.com/gitalk/gitalk
