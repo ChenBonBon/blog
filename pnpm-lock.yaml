@@ -10,7 +10,6 @@ specifiers:
   hexo-renderer-marked: ^4.0.0
   hexo-renderer-stylus: ^2.0.0
   hexo-server: ^2.0.0
-  hexo-theme-landscape: ^0.0.3
 
 dependencies:
   hexo: 5.4.0
@@ -22,7 +21,6 @@ dependencies:
   hexo-renderer-marked: 4.1.0
   hexo-renderer-stylus: 2.0.1
   hexo-server: 2.0.0
-  hexo-theme-landscape: 0.0.3
 
 packages:
 
@@ -715,10 +713,6 @@ packages:
       morgan: 1.10.0
       open: 7.4.2
       serve-static: 1.14.1
-    dev: false
-
-  /hexo-theme-landscape/0.0.3:
-    resolution: {integrity: sha512-b0Di+TUVs4ESrNX4ULEh9uQmADpO6kr10rIJ2OGZM8suNQNFKdxn+vJUjnLfKkCPJAfVmS7/S83KCNYe4tpoNw==}
     dev: false
 
   /hexo-util/2.5.0:
