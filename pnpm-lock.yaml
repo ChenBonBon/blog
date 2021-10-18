@@ -2,9 +2,12 @@ lockfileVersion: 5.3
 
 specifiers:
   hexo: ^5.0.0
+  hexo-blog-encrypt: ^3.1.6
   hexo-generator-archive: ^1.0.0
   hexo-generator-category: ^1.0.0
+  hexo-generator-feed: ^3.0.0
   hexo-generator-index: ^2.0.0
+  hexo-generator-searchdb: ^1.4.0
   hexo-generator-tag: ^1.0.0
   hexo-renderer-ejs: ^1.0.0
   hexo-renderer-marked: ^4.0.0
@@ -13,9 +16,12 @@ specifiers:
 
 dependencies:
   hexo: 5.4.0
+  hexo-blog-encrypt: 3.1.6
   hexo-generator-archive: 1.0.0
   hexo-generator-category: 1.0.0
+  hexo-generator-feed: 3.0.0
   hexo-generator-index: 2.0.0
+  hexo-generator-searchdb: 1.4.0
   hexo-generator-tag: 1.0.0
   hexo-renderer-ejs: 1.0.0
   hexo-renderer-marked: 4.1.0
@@ -587,6 +593,10 @@ packages:
       function-bind: 1.1.1
     dev: false
 
+  /hexo-blog-encrypt/3.1.6:
+    resolution: {integrity: sha512-aq/KiuwoHLTMOOw0WiVtoTpPfx5x5mjkGJAJgKOp7gH0fjW4Pt1uT2n2MOVWBwY2q3qLtWq60na8RL5qmzZL1w==}
+    dev: false
+
   /hexo-cli/4.3.0:
     resolution: {integrity: sha512-lr46h1tK1RNQJAQZbzKYAWGsmqF5DLrW6xKEakqv/o9JqgdeempBjIm7HqjcZEUBpWij4EO65X6YJiDmT9LR7g==}
     engines: {node: '>=10.13.0'}
@@ -635,12 +645,30 @@ packages:
       hexo-pagination: 1.0.0
     dev: false
 
+  /hexo-generator-feed/3.0.0:
+    resolution: {integrity: sha512-Jo35VSRSNeMitS2JmjCq3OHAXXYU4+JIODujHtubdG/NRj2++b3Tgyz9pwTmROx6Yxr2php/hC8og5AGZHh8UQ==}
+    engines: {node: '>=10.13.0'}
+    dependencies:
+      hexo-util: 2.5.0
+      nunjucks: 3.2.3
+    transitivePeerDependencies:
+      - chokidar
+    dev: false
+
   /hexo-generator-index/2.0.0:
     resolution: {integrity: sha512-q/29Vj9BZs0dwBcF+s9IT8ymS4aYZsDwBEYDnh96C8tsX+KPY5v6TzCdttz58BchifaJpP/l9mi6u9rZuYqA0g==}
     engines: {node: '>=10.13.0'}
     dependencies:
       hexo-pagination: 1.0.0
       timsort: 0.3.0
+    dev: false
+
+  /hexo-generator-searchdb/1.4.0:
+    resolution: {integrity: sha512-TkwxlqxptRIXHwYeI/V32O2TxXkfqWa37Rrmg347Q+YT1eqk7vQ31vR4zLudBAcSr85ST0VUedYd1/gLBSJl9Q==}
+    dependencies:
+      nunjucks: 3.2.3
+    transitivePeerDependencies:
+      - chokidar
     dev: false
 
   /hexo-generator-tag/1.0.0:
