@@ -115,6 +115,8 @@ body {
 		word-wrap: break-word;//针对单词本身换行做处理
 		word-break: break-all;//针对句子本身换行做处理
 	*/
+  overflow: hidden;
+  height: 100vh;
 }
 p {
   text-align: justify;
@@ -1354,6 +1356,7 @@ main {
   width: 100%;
   height: 100vh;
   line-height: 2;
+  overflow: auto;
 }
 .layout-cart {
   position: relative;
