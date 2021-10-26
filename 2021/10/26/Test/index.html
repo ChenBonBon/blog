@@ -8,7 +8,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
   <title>
     
-      使用GitHub Pages搭建个人博客 | BonBon&#39;s
+       | BonBon&#39;s
     
   </title>
   <meta name="author" content="BonBon Chen">
@@ -55,29 +55,12 @@
 		插件作者：KELEN
 		插件来源: https://github.com/KELEN/katelog
 -->
-
-	
-		<div class="layout-toc">
-			<div id="layout-toc">
-				<div class="k-catelog-list" id="catelog-list" data-title="文章目录"></div>
-			</div>
-		</div>
-
-		
-<script src="/blog/plugin/toc/katelog.min.js"></script>
-
-
-		
 	 
 
 <div class="layout-post">
 	<div id="layout-post">
 		<div class="article-title">
 			
-	<a href="/blog/2021/10/14/githubPages/" itemprop="url">
-		使用GitHub Pages搭建个人博客
-	</a>
-
 		</div>
 
 		<div class="article-meta">
@@ -91,8 +74,8 @@
 
 	更新于
 
-	<a href="/blog/2021/10/14/githubPages/" itemprop="url">
-		<time datetime="2021-10-14T08:07:02.000Z" itemprop="dateUpdated">
+	<a href="/blog/2021/10/26/Test/" itemprop="url">
+		<time datetime="2021-10-26T02:39:14.000Z" itemprop="dateUpdated">
 	  		2021-10-26
 	  </time>
 	</a> 
@@ -101,14 +84,7 @@
 
 			</span>
 			<span>
-				
-	<i class="icon-price-tags"></i>
-	
-		<a href="/blog/tags/GitHub-Pages-%E5%8D%9A%E5%AE%A2-blog/" class=" ">
-			GitHub Pages 博客 blog
-		</a>
-	
-		
+						
 			</span>
 			
 			
@@ -118,41 +94,10 @@
 		</div>
 
 		<div class="article-content" id="article-content">
-			<h2 id="1-注册-GitHub-账号"><a href="#1-注册-GitHub-账号" class="headerlink" title="1. 注册 GitHub 账号"></a>1. 注册 GitHub 账号</h2><p>如果没有 GitHub 账号，进入<a target="_blank" rel="noopener" href="https://github.com,点击右上角sign/">https://github.com，点击右上角Sign</a> up，根据步骤完成注册。</p>
-<h2 id="2-创建一个仓库"><a href="#2-创建一个仓库" class="headerlink" title="2. 创建一个仓库"></a>2. 创建一个仓库</h2><p>点击 New 按钮进入创建仓库页面，Repository name 即为 GitHub Pages 的生成的博客网站 Url 中的 pathname。</p>
-<p>eg: Repository name 为 blog，Url 为<code>https://chenbonbon.github.io/blog/</code></p>
-<h2 id="3-安装-Hexo"><a href="#3-安装-Hexo" class="headerlink" title="3. 安装 Hexo"></a>3. 安装 Hexo</h2><p>此时已经可以开始写 blog 的页面代码，这里可以用 React、Vue 或者任何你喜欢的方式进行开发，并将打包之后的代码提交到代码仓库中。这里为了方便，我们使用 <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/">Hexo</a>进行博客框架的搭建。</p>
-<h3 id="什么是-Hexo？"><a href="#什么是-Hexo？" class="headerlink" title="什么是 Hexo？"></a>什么是 Hexo？</h3><p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><h4 id="安装前提"><a href="#安装前提" class="headerlink" title="安装前提"></a>安装前提</h4><p>安装 Hexo 相当简单，只需要先安装下列应用程序即可：</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://nodejs.org/zh-cn/">Node.js</a> (Node.js 版本需不低于 10.13，建议使用 Node.js 12.0 及以上版本)</li>
-<li><a target="_blank" rel="noopener" href="http://git-scm.com/">Git</a></li>
-</ul>
-<h4 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h4><p>在安装完 Node.js 和 Git 后，即可使用 npm 安装 Hexo。</p>
-<p><code>npm install -g hexo-cli</code></p>
-<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>安装完 hexo-cli 后，可以使用 hexo version 查看 hexo 的版本。</p>
-<p>Hexo 常用命令<br><code>hexo init &lt;folder&gt;</code> 创建 hexo 项目<br><code>hexo new [layout] &lt;title&gt;</code> 创建 hexo 文章，layout 为空会默认在 source/_posts 目录下新建 title.md 文件。<br><code>hexo clean</code> 删除本地已打包生成的代码<br><code>hexo server</code> 启动本地服务器，查看网站效果<br><code>hexo generate</code> 打包代码</p>
-<p>hexo 的配置可以参考<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/configuration">Hexo 配置</a></p>
-<h3 id="书写文章"><a href="#书写文章" class="headerlink" title="书写文章"></a>书写文章</h3><p>在 source/_posts 目录下修改对应的 md 文件。</p>
-<h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><ol>
-<li>将 <a target="_blank" rel="noopener" href="https://github.com/marketplace/travis-ci">Travis CI</a> 添加到你的 GitHub 账户中。</li>
-<li>前往 GitHub 的 <a target="_blank" rel="noopener" href="https://github.com/settings/installations">Applications settings</a>，配置 Travis CI 权限，使其能够访问你的 repository。</li>
-<li>在浏览器内新建一个标签页，前往 GitHub <a target="_blank" rel="noopener" href="https://github.com/settings/tokens">新建 Personal Access Token</a>，只勾选 repo 的权限并生成一个新的 Token。Token 生成后请复制并保存好。</li>
-<li>回到 Travis CI，前往你的 repository 的设置页面，在 Environment Variables 下新建一个环境变量，Name 为 GH_TOKEN，Value 为刚才你在 GitHub 生成的 Token。确保 DISPLAY VALUE IN BUILD LOG 保持 不被勾选 避免你的 Token 泄漏。点击 Add 保存。</li>
-<li>在你的 Hexo 站点文件夹中新建一个 .travis.yml 文件：</li>
-</ol>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">sudo:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">language:</span> <span class="string">node_js</span></span><br><span class="line"><span class="attr">node_js:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="number">12</span> <span class="comment"># use nodejs v10 LTS</span></span><br><span class="line"><span class="attr">cache:</span> <span class="string">npm</span></span><br><span class="line"><span class="attr">branches:</span></span><br><span class="line">  <span class="attr">only:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">master</span> <span class="comment"># build master branch only</span></span><br><span class="line"><span class="attr">script:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">hexo</span> <span class="string">generate</span> <span class="comment"># generate static files</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">provider:</span> <span class="string">pages</span></span><br><span class="line">  <span class="attr">skip-cleanup:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">github-token:</span> <span class="string">$GH_TOKEN</span></span><br><span class="line">  <span class="attr">keep-history:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">on:</span></span><br><span class="line">    <span class="attr">branch:</span> <span class="string">master</span></span><br><span class="line">  <span class="attr">local-dir:</span> <span class="string">public</span></span><br></pre></td></tr></table></figure>
-
-<ol start="6">
-<li>将 .travis.yml 推送到 repository 中。Travis CI 应该会自动开始运行，并将生成的文件推送到同一 repository 下的 gh-pages 分支下</li>
-<li>在 GitHub 中前往你的 repository 的设置页面，修改 GitHub Pages 的部署分支为 gh-pages。</li>
-<li>前往 https://&lt;你的 GitHub 用户名&gt;.github.io 查看你的站点是否可以访问。这可能需要一些时间。</li>
-</ol>
-<h3 id="Hexo-主题"><a href="#Hexo-主题" class="headerlink" title="Hexo 主题"></a>Hexo 主题</h3><p>访问<a target="_blank" rel="noopener" href="https://hexo.io/themes/">https://hexo.io/themes/</a> 可以获取多达 346 款皮肤。</p>
-	
+				
 		</div>
 		
-		<div id="current-post-cover" data-scr="https://z3.ax1x.com/2021/10/26/55HDiR.jpg"></div>
+		<div id="current-post-cover" data-scr="https://z3.ax1x.com/2021/10/26/55Hyz6.jpg"></div>
 
 		<!-- relate post, comment...-->
 		<div class="investment-container">
@@ -167,10 +112,10 @@
 	<span>
 		<a id="totop-post-page">返回顶部</a>
 		
-			<a href="/blog/2021/10/26/Test/" title="" rel="prev">
-				&laquo;上一篇
-			</a>
 		
+			<a href="/blog/2021/10/14/githubPages/" title="使用GitHub Pages搭建个人博客" rel="next">
+				下一篇&raquo;
+			</a>
 			
 	</span>
 
@@ -189,21 +134,22 @@
 			
 					<li>
 						<div class="relate-post-text">
-							<a class="relate-post-title" href="/blog/2021/10/26/Test/" title="">
-											
+							<a class="relate-post-title" href="/blog/2021/10/14/githubPages/" title="使用GitHub Pages搭建个人博客">
+								使用GitHub Pages搭建个人博客			
 							</a>
 							<p class="relate-post-date">
 								<i class="fa fa-calendar"></i>
-								十月 26日, 2021				
+								十月 14日, 2021				
 							</p>
 							<p class="relate-post-content">
-								
+								1. 注册 GitHub 账号如果没有 GitHub 账号，进入https://github.com，点击右上角Sign up，根据步骤完成注册。
+2. 创建一个仓库点击 New 按钮进入创建仓库页面，Repository name ...
 							</p>
 						</div>
 
 						<div class="relate-post-cover">
-							<a href="/blog/2021/10/26/Test/" title="">				
-								<img class="lazy" src="img/lazy.gif" data-src="https://z3.ax1x.com/2021/10/26/55HWee.jpg" />
+							<a href="/blog/2021/10/14/githubPages/" title="使用GitHub Pages搭建个人博客">				
+								<img class="lazy" src="img/lazy.gif" data-src="https://z3.ax1x.com/2021/10/26/55HDiR.jpg" />
 							</a>
 						</div>
 					</li>												
