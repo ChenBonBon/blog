@@ -1,0 +1,17 @@
+<footer>
+  <div id="navigation-show"><%- partial('nav') %></div>
+
+  <div class="copyright">
+    <p>
+      <% if( theme.since && theme.since < date(new Date(), 'YYYY') ) { %>
+      &copy;<%= theme.since %> - <%= date(new Date(), 'YYYY') %>, content by <%=
+      theme.author || config.author || config.title %>. All Rights Reserved. <%
+      } else { %> &copy;<%= date(new Date(), 'YYYY') %>, content by <%=
+      theme.author || config.author || config.title %>. All Rights Reserved. <%
+      } %> <%- link_to("http://hexo.io/", "Hexo", {external: true})%> Theme <%-
+      link_to("https://github.com/Sariay/hexo-theme-Annie", "Annie", {external:
+      true})%> by Sariay.
+    </p>
+    <p><%- partial('plugin/statistics', {type: 'busuanzi-count'}) %></p>
+  </div>
+</footer>
