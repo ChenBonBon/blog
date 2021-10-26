@@ -1,14 +1,28 @@
-<ul id="global-nav">
-	<% for(var i in theme.menu) { %>
-		<li class="menu-<%= i %>">
-			<a href="<%- url_for(theme.menu[i]) %>" class="menu-item-<%= i %>" target="_blank"><%- __(i) %></a>
-		</li>
-		
-	<% } %>
+<div id="nav">
+  <div id="avatar">
+    <a href="<%- url_for(theme.avatar_link) %>" target="_blank">
+      <img
+        class="lazy"
+        src="<%= theme.lazy_image %>"
+        data-src="<%= theme.avatar %>"
+      />
+    </a>
+  </div>
+  <ul id="global-nav">
+    <% for(var i in theme.menu) { %>
+    <li class="menu-<%= i %>">
+      <a
+        href="<%- url_for(theme.menu[i]) %>"
+        class="menu-item-<%= i %>"
+        target="_blank"
+        ><%- __(i) %></a
+      >
+    </li>
 
-	<% if (theme.local_search.enable) { %>
-		<li class="menu-search">
-			<a href="javascript:;" class="popup-trigger"><%= __('search') %></a>
-		</li>
-	<% } %>
-</ul>
+    <% } %> <% if (theme.local_search.enable) { %>
+    <li class="menu-search">
+      <a href="javascript:;" class="popup-trigger"><%= __('search') %></a>
+    </li>
+    <% } %>
+  </ul>
+</div>

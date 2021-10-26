@@ -13,6 +13,8 @@ menu:
 # favicon & logo
 favicon: /img/favicon.ico
 logo: /img/logo.png
+avatar: /blog/img/avatar.png
+avatar_link: https://github.com/ChenBonBon
 
 # background_image
 # mask_alpha: 0 ~ 1

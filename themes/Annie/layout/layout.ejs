@@ -2,10 +2,13 @@
 <html class="html-loading">
   <%- partial('_partial/head',{cache: true}) %>
   <body>
-    <!--main-->
-    <main><%- body %></main>
+    <div id="blog">
+      <%- partial('_partial/nav') %>
+      <!--main-->
+      <main><%- body %></main>
 
-    <!--footer-->
-    <%- partial('_partial/footer-after',{cache: true}) %>
+      <!--footer-->
+      <%- partial('_partial/footer-after',{cache: true}) %>
+    </div>
   </body>
 </html>
