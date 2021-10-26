@@ -2626,6 +2626,11 @@ blockquote footer cite:before {
   color: #fff;
   padding: 8px;
 }
+#blog {
+  display: grid;
+  grid-template-columns: 2fr 8fr;
+  grid-column-gap: 10px;
+}
 .nav-trigger {
   position: fixed;
   top: 0px;
@@ -2801,6 +2806,9 @@ blockquote footer cite:before {
   height: 10vh;
   text-align: center;
 }
+#nav #avatar img {
+  width: 50%;
+}
 #global-nav,
 #global-social {
   list-style: none;
@@ -2809,8 +2817,7 @@ blockquote footer cite:before {
 }
 #global-nav li,
 #global-social li {
-  display: inline-block;
-  margin: 10px auto;
+  margin: 20px auto;
 }
 #global-nav li a,
 #global-social li a {
