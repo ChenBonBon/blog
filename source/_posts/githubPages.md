@@ -2,17 +2,18 @@
 title: 使用GitHub Pages搭建个人博客
 date: 2021-10-14 16:07:02
 tags: GitHub Pages 博客 blog
+categories: GitHub Pages
 ---
 
 ## 1. 注册 GitHub 账号
 
-如果没有 GitHub 账号，进入https://github.com，点击右上角Sign up，根据步骤完成注册。
+如果没有 GitHub 账号，进入 https://github.com ，点击右上角Sign up，根据步骤完成注册。
 
 ## 2. 创建一个仓库
 
 点击 New 按钮进入创建仓库页面，Repository name 即为 GitHub Pages 的生成的博客网站 Url 中的 pathname。
 
-eg: Repository name 为 blog，Url 为`https://chenbonbon.github.io/blog/`
+eg: Repository name 为 blog，Url 为https://chenbonbon.github.io/blog/
 
 ## 3. 安装 Hexo
 
