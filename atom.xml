@@ -6,7 +6,7 @@
   <link href="https://chenbonbon.github.io/blog/atom.xml" rel="self"/>
   
   <link href="https://chenbonbon.github.io/blog/"/>
-  <updated>2021-10-26T04:07:08.605Z</updated>
+  <updated>2021-10-28T03:27:16.173Z</updated>
   <id>https://chenbonbon.github.io/blog/</id>
   
   <author>
@@ -17,15 +17,27 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title></title>
-    <link href="https://chenbonbon.github.io/blog/2021/10/26/Test/"/>
-    <id>https://chenbonbon.github.io/blog/2021/10/26/Test/</id>
+    <title>Go开发环境搭建</title>
+    <link href="https://chenbonbon.github.io/blog/2021/10/26/Golang_1/"/>
+    <id>https://chenbonbon.github.io/blog/2021/10/26/Golang_1/</id>
     <published>2021-10-26T02:39:14.000Z</published>
-    <updated>2021-10-26T04:07:08.605Z</updated>
+    <updated>2021-10-28T03:27:16.173Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;1-下载安装-Golang&quot;&gt;&lt;a href=&quot;#1-下载安装-Golang&quot; class=&quot;headerlink&quot; title=&quot;1. 下载安装 Golang&quot;&gt;&lt;/a&gt;1. 下载安装 Golang&lt;/h2&gt;&lt;p&gt;下载地址 &lt;a</summary>
+        
+      
     
     
     
+    <category term="Golang" scheme="https://chenbonbon.github.io/blog/categories/Golang/"/>
     
+    
+    <category term="Go" scheme="https://chenbonbon.github.io/blog/tags/Go/"/>
     
   </entry>
   
@@ -34,18 +46,20 @@
     <link href="https://chenbonbon.github.io/blog/2021/10/14/githubPages/"/>
     <id>https://chenbonbon.github.io/blog/2021/10/14/githubPages/</id>
     <published>2021-10-14T08:07:02.000Z</published>
-    <updated>2021-10-26T04:07:08.605Z</updated>
+    <updated>2021-10-28T03:27:16.173Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h2 id=&quot;1-注册-GitHub-账号&quot;&gt;&lt;a href=&quot;#1-注册-GitHub-账号&quot; class=&quot;headerlink&quot; title=&quot;1. 注册 GitHub 账号&quot;&gt;&lt;/a&gt;1. 注册 GitHub 账号&lt;/h2&gt;&lt;p&gt;如果没有 GitHub 账号，进入&lt;a</summary>
+    <summary type="html">&lt;h2 id=&quot;1-注册-GitHub-账号&quot;&gt;&lt;a href=&quot;#1-注册-GitHub-账号&quot; class=&quot;headerlink&quot; title=&quot;1. 注册 GitHub 账号&quot;&gt;&lt;/a&gt;1. 注册 GitHub 账号&lt;/h2&gt;&lt;p&gt;如果没有 GitHub 账号，进入</summary>
         
       
     
     
+    
+    <category term="GitHub Pages" scheme="https://chenbonbon.github.io/blog/categories/GitHub-Pages/"/>
     
     
     <category term="GitHub Pages 博客 blog" scheme="https://chenbonbon.github.io/blog/tags/GitHub-Pages-%E5%8D%9A%E5%AE%A2-blog/"/>
