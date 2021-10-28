@@ -82,3 +82,7 @@ export GOSUMDB=sum.golang.google.cn
   可以查看版本库的历史，并且直接在代码编辑器里面可以看到某一段代码的修改历史
 - Visual Studio IntelliCod (Microsoft)
   智能代码提示
+- Code Runner (Jun Han)
+  在代码右上角会新增一个 Run Code 按钮，点击后可以直接运行代码
+
+在编辑代码时，右下角会有多次提示安装一些依赖，比如`dlv`、`golint`、`gocode`等等，点击Install All即可。
