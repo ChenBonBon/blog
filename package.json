@@ -2,6 +2,7 @@
   "name": "hexo-site",
   "version": "0.0.0",
   "private": true,
+  "homepage": "https://chenbonbon.github.io/blog/",
   "scripts": {
     "start": "hexo clean && hexo server",
     "build": "hexo clean && hexo generate"
