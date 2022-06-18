@@ -1,4 +1,5 @@
 module.exports = {
+  base: "blog-new",
   title: "Vue.js设计与实现",
   description: "Vue.js设计与实现读后感",
   themeConfig: {
