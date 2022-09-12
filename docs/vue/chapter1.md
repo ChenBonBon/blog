@@ -68,4 +68,4 @@ $("#app") // 获取div
 
 基于此，我们可以粗略总结一下 innerHTML、虚拟 DOM 以及原生 JavaScript（指 createElement 等方法）在更新页面时的性能，如图 1-1 所示。
 
-![alt 图1-1](./images/vue-1.jpg)
+![alt 图1-1](../images/vue-1.jpg)

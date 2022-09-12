@@ -1,7 +1,7 @@
 # MutationObserver
 
 前段时间碰到一个需求，一个可以动态增加一行的列表，如下图 1 所示。
-![alt 图1](./images/mutation-observer-1.jpg)
+![alt 图1](../images/mutation-observer-1.jpg)
 
 这里用到了 ant design 的 Form.List 组件进行开发，但是遇到一个问题：当 Form.List 的高度固定时，点击新增按钮时，新增的一行会在超出高度之外，所以从用户体验的角度考虑，希望可以在新增之后自动滚动到 Form.List 的底部。
 
