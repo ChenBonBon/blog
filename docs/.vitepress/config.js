@@ -12,6 +12,12 @@ export default defineConfig({
         ],
       },
       {
+        text: "antd",
+        items: [
+          { text: "Form", link: "/antd/form" },
+        ],
+      },
+      {
         text: "一些API",
         items: [{ text: "MutationObserver", link: "/api/mutation-observer" }],
       },
