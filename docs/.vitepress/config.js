@@ -23,7 +23,7 @@ export default defineConfig({
         text: '一些工具',
         items: [
           { text: 'npm、yarn 和 pnpm', link: '/lib/npm' },
-          { text: 'dnd kit', link: '/lib/dndkit' },
+          { text: 'Emotion', link: '/lib/emotion' },
         ],
       },
       {
