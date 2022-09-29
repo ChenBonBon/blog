@@ -1,5 +1,5 @@
 {
-  "name": "blog-new",
+  "name": "blog",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,15 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ChenBonBon/blog-new.git"
+    "url": "git+https://github.com/ChenBonBon/blog.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ChenBonBon/blog-new/issues"
+    "url": "https://github.com/ChenBonBon/blog/issues"
   },
-  "homepage": "https://github.com/ChenBonBon/blog-new#readme",
+  "homepage": "https://github.com/ChenBonBon/blog#readme",
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^3.3.0",
     "@types/react": ">= 16.8.0 < 19.0.0",
