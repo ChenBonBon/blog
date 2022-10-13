@@ -56,6 +56,17 @@ yarn add @emotion/react
 pnpm add @emotion/react
 ```
 
+这里会提示我们缺少 peer dependencies，所以我们还需要安装`@babel/core`
+
+```bash
+# npm
+npm install --save @babel/core@">=7.0.0 <8.0.0"
+# yarn
+yarn add @babel/core@">=7.0.0 <8.0.0"
+# pnpm
+pnpm add @babel/core@">=7.0.0 <8.0.0"
+```
+
 安装完成后，我们写一个例子来测试一下：
 
 ```typescript
@@ -89,3 +100,43 @@ render(
 ### css 属性
 
 Emotion 最基本的使用方式就是使用 css 属性，使用 css 属性可以简单灵活地为组件添加样式。
+
+如上面的例子所示，用到了 css 属性，但是我们会发现，页面并没有正确的进行渲染，而且 vs code 编辑器还会有红色的波浪线。这是因为我们如果要使用 Emotion 的 css 属性，必须要使用 babel 进行转译或者使用 jsx 注解。这里我们选择使用 babel 进行转译。
+
+```bash
+# npm
+npm install --save-dev @emotion/babel-plugin
+# yarn
+yarn add -D @emotion/babel-plugin
+# pnpm
+pnpm add -D @emotion/babel-plugin
+```
+
+安装完成后，我们打开`vite.config.ts`文件修改 vite 的配置。
+
+```diff
+// ...
+plugins: [
+  react({
++   jsxImportSource: "@emotion/react",
++     babel: {
++       plugins: ["@emotion/babel-plugin"],
++     },
+  }),
+],
+```
+
+同时修改一下`tsconfig.json`文件。
+
+```diff
+"compilerOptions": {
+  // ...
++  "jsxImportSource": "@emotion/react"
+}
+```
+
+现在页面上应该可以正确出现粉红色的文字了。
+
+![alt 图1](../images/emotion-1.jpg)
+
+css属性有多种不同的用法，可以同时支持object、string
