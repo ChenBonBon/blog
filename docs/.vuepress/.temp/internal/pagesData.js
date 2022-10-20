@@ -17,6 +17,10 @@ export const pagesData = {
   "v-f7f2705c": () => import(/* webpackChunkName: "v-f7f2705c" */"/Users/bonbon/Documents/Code/blog/docs/.vuepress/.temp/pages/vue/chapter2.html.js").then(({ data }) => data),
   // path: /interview/js/context.html
   "v-600b9629": () => import(/* webpackChunkName: "v-600b9629" */"/Users/bonbon/Documents/Code/blog/docs/.vuepress/.temp/pages/interview/js/context.html.js").then(({ data }) => data),
+  // path: /interview/js/scope.html
+  "v-f9c9ef38": () => import(/* webpackChunkName: "v-f9c9ef38" */"/Users/bonbon/Documents/Code/blog/docs/.vuepress/.temp/pages/interview/js/scope.html.js").then(({ data }) => data),
+  // path: /interview/js/this.html
+  "v-1a5f0bbc": () => import(/* webpackChunkName: "v-1a5f0bbc" */"/Users/bonbon/Documents/Code/blog/docs/.vuepress/.temp/pages/interview/js/this.html.js").then(({ data }) => data),
   // path: /404.html
   "v-3706649a": () => import(/* webpackChunkName: "v-3706649a" */"/Users/bonbon/Documents/Code/blog/docs/.vuepress/.temp/pages/404.html.js").then(({ data }) => data),
 }

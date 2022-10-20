@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/ChenBonBon/blog#readme",
   "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^3.3.1",
     "@vuepress/client": "^2.0.0-beta.50",
     "prettier": "^2.7.1",
     "vue": "^3.2.37",

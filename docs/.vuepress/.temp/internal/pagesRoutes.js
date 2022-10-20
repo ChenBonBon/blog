@@ -8,5 +8,7 @@ export const pagesRoutes = [
   ["v-fb5c219a","/vue/chapter1.html",{"title":"权衡的艺术"},["/vue/chapter1","/vue/chapter1.md"]],
   ["v-f7f2705c","/vue/chapter2.html",{"title":"框架设计的核心要素"},["/vue/chapter2","/vue/chapter2.md"]],
   ["v-600b9629","/interview/js/context.html",{"title":"执行上下文和执行栈"},["/interview/js/context","/interview/js/context.md"]],
+  ["v-f9c9ef38","/interview/js/scope.html",{"title":"作用域"},["/interview/js/scope","/interview/js/scope.md"]],
+  ["v-1a5f0bbc","/interview/js/this.html",{"title":"this"},["/interview/js/this","/interview/js/this.md"]],
   ["v-3706649a","/404.html",{"title":""},["/404"]],
 ]

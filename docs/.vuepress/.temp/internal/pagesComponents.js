@@ -19,6 +19,10 @@ export const pagesComponents = {
   "v-f7f2705c": defineAsyncComponent(() => import(/* webpackChunkName: "v-f7f2705c" */"/Users/bonbon/Documents/Code/blog/docs/.vuepress/.temp/pages/vue/chapter2.html.vue")),
   // path: /interview/js/context.html
   "v-600b9629": defineAsyncComponent(() => import(/* webpackChunkName: "v-600b9629" */"/Users/bonbon/Documents/Code/blog/docs/.vuepress/.temp/pages/interview/js/context.html.vue")),
+  // path: /interview/js/scope.html
+  "v-f9c9ef38": defineAsyncComponent(() => import(/* webpackChunkName: "v-f9c9ef38" */"/Users/bonbon/Documents/Code/blog/docs/.vuepress/.temp/pages/interview/js/scope.html.vue")),
+  // path: /interview/js/this.html
+  "v-1a5f0bbc": defineAsyncComponent(() => import(/* webpackChunkName: "v-1a5f0bbc" */"/Users/bonbon/Documents/Code/blog/docs/.vuepress/.temp/pages/interview/js/this.html.vue")),
   // path: /404.html
   "v-3706649a": defineAsyncComponent(() => import(/* webpackChunkName: "v-3706649a" */"/Users/bonbon/Documents/Code/blog/docs/.vuepress/.temp/pages/404.html.vue")),
 }
