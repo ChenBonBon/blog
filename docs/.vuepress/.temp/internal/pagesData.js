@@ -23,4 +23,6 @@ export const pagesData = {
   "v-1a5f0bbc": () => import(/* webpackChunkName: "v-1a5f0bbc" */"/Users/bonbon/Documents/Code/blog/docs/.vuepress/.temp/pages/interview/js/this.html.js").then(({ data }) => data),
   // path: /404.html
   "v-3706649a": () => import(/* webpackChunkName: "v-3706649a" */"/Users/bonbon/Documents/Code/blog/docs/.vuepress/.temp/pages/404.html.js").then(({ data }) => data),
+  // path: /password.html
+  "v-6a1a58c5": () => import(/* webpackChunkName: "v-6a1a58c5" */"/Users/bonbon/Documents/Code/blog/docs/.vuepress/.temp/pages/password.html.js").then(({ data }) => data),
 }

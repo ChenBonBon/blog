@@ -5,6 +5,7 @@ import clientConfig3 from '/Users/bonbon/Documents/Code/blog/node_modules/.pnpm/
 import clientConfig4 from '/Users/bonbon/Documents/Code/blog/node_modules/.pnpm/@vuepress+plugin-nprogress@2.0.0-beta.51/node_modules/@vuepress/plugin-nprogress/lib/client/config.js'
 import clientConfig5 from '/Users/bonbon/Documents/Code/blog/node_modules/.pnpm/@vuepress+plugin-theme-data@2.0.0-beta.51/node_modules/@vuepress/plugin-theme-data/lib/client/config.js'
 import clientConfig6 from '/Users/bonbon/Documents/Code/blog/node_modules/.pnpm/@vuepress+theme-default@2.0.0-beta.51/node_modules/@vuepress/theme-default/lib/client/config.js'
+import clientConfig7 from '/Users/bonbon/Documents/Code/blog/pkg/vuepress-plugin-simple-encrypt/clientConfig.ts'
 
 export const clientConfigs = [
   clientConfig0,
@@ -14,4 +15,5 @@ export const clientConfigs = [
   clientConfig4,
   clientConfig5,
   clientConfig6,
+  clientConfig7,
 ]

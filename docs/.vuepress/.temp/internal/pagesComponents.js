@@ -25,4 +25,6 @@ export const pagesComponents = {
   "v-1a5f0bbc": defineAsyncComponent(() => import(/* webpackChunkName: "v-1a5f0bbc" */"/Users/bonbon/Documents/Code/blog/docs/.vuepress/.temp/pages/interview/js/this.html.vue")),
   // path: /404.html
   "v-3706649a": defineAsyncComponent(() => import(/* webpackChunkName: "v-3706649a" */"/Users/bonbon/Documents/Code/blog/docs/.vuepress/.temp/pages/404.html.vue")),
+  // path: /password.html
+  "v-6a1a58c5": defineAsyncComponent(() => import(/* webpackChunkName: "v-6a1a58c5" */"/Users/bonbon/Documents/Code/blog/docs/.vuepress/.temp/pages/password.html.vue")),
 }

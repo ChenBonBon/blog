@@ -11,4 +11,5 @@ export const pagesRoutes = [
   ["v-f9c9ef38","/interview/js/scope.html",{"title":"作用域"},["/interview/js/scope","/interview/js/scope.md"]],
   ["v-1a5f0bbc","/interview/js/this.html",{"title":"this"},["/interview/js/this","/interview/js/this.md"]],
   ["v-3706649a","/404.html",{"title":""},["/404"]],
+  ["v-6a1a58c5","/password.html",{"title":""},["/password"]],
 ]

@@ -1,4 +1,5 @@
 import { defaultTheme, defineUserConfig } from 'vuepress';
+import SimpleEncrypt from '../../pkg/vuepress-plugin-simple-encrypt';
 
 export default defineUserConfig({
   lang: 'zh-CN',
@@ -47,6 +48,11 @@ export default defineUserConfig({
         ],
       },
     ],
+    themePlugins: {
+      backToTop: true,
+      nprogress: true,
+    },
   }),
   open: true,
+  plugins: [SimpleEncrypt()],
 });
