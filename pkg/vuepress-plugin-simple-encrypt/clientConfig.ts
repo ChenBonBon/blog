@@ -1,6 +1,7 @@
 import Password from './password.vue';
 
-const encryptedRoutes = (window as any).__ENCRYPTED_ROUTES__;
+const encryptedRoutes = (globalThis as any).__ENCRYPTED_ROUTES__;
+console.log(globalThis);
 
 export default {
   enhance({ app, router }) {
