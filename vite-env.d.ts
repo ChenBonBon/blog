@@ -1,5 +1,8 @@
-declare interface Window {
-  __ENCRYPTED_ROUTES__: string[];
+declare module '*.vue';
+
+interface EncryptedRoute {
+  path: string;
+  password: string;
 }
 
-declare module '*.vue';
+declare const __ENCRYPTED_ROUTES__: EncryptedRoute[];
