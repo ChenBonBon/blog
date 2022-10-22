@@ -1,1 +1,0 @@
-export const data = JSON.parse("{\"key\":\"v-7d7b94ed\",\"path\":\"/api/mutation-observer.html\",\"title\":\"MutationObserver\",\"lang\":\"zh-CN\",\"frontmatter\":{},\"excerpt\":\"\",\"headers\":[],\"git\":{\"updatedTime\":1662968990000,\"contributors\":[{\"name\":\"BonBon\",\"email\":\"per_cherry@163.com\",\"commits\":1}]},\"filePathRelative\":\"api/mutation-observer.md\"}")

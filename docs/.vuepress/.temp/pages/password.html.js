@@ -1,1 +1,0 @@
-export const data = JSON.parse("{\"key\":\"v-6a1a58c5\",\"path\":\"/password.html\",\"title\":\"\",\"lang\":\"zh-CN\",\"frontmatter\":{},\"excerpt\":\"\",\"headers\":[],\"git\":{},\"filePathRelative\":null}")
