@@ -11,7 +11,7 @@ export default {
 
 <template>
   <div :class="['button', type]">
-    <div data-animation="ripple">Click</div>
+    <div data-animation="ripple"><slot></slot></div>
   </div>
 </template>
 

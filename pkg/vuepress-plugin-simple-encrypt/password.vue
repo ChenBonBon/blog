@@ -31,7 +31,6 @@ export default {
         location.href = path;
       }
     },
-    clear() {},
   },
   components: { PasswordInput, Button },
 };
@@ -42,7 +41,6 @@ export default {
     <PasswordInput @onInput="onInput" />
     <div class="controls">
       <Button type="primary" @click="submit">确认</Button>
-      <Button @click="clear">清空</Button>
     </div>
   </div>
 </template>
