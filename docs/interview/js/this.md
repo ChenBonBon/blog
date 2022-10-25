@@ -19,7 +19,27 @@
 
 ## this 案例
 
+### 默认绑定
+
 案例一
+
+```javascript
+var a = 10;
+
+function foo() {
+  console.log(this.a);
+}
+
+foo();
+```
+
+非严格模式，`foo`在全局作用域下进行调用，等价于`window.foo`，this 指向 window。
+
+```bash
+10
+```
+
+案例二
 
 ```javascript
 'use strict';
@@ -32,20 +52,23 @@ function foo() {
   console.log(this.a);
 }
 
+console.log(window.foo);
 console.log('this2', this);
+
 foo();
 ```
 
-由于是严格模式，所以函数体内部的 this 指向 undefined，全局作用域下的 this 不受影响，指向 window。
+严格模式，函数体内部的 this 指向 undefined，全局作用域下的 this 不受影响，指向 window。
 
 ```bash
-this2 Window {window: Window, self: Window, document: document, name: '', location: Location, …}
+f foo() {...}
+this2 Window{...}
 this1 undefined
 10
-Uncaught TypeError: Cannot read properties of undefined (reading 'a')
+Uncaught TypeError: Cannot read property 'a' of undefined
 ```
 
-案例二
+案例三
 
 ```javascript
 let a = 10;
@@ -57,6 +80,7 @@ function foo() {
 }
 
 foo();
+
 console.log(window.a);
 ```
 
@@ -68,43 +92,262 @@ undefined
 undefined
 ```
 
-案例三
+案例四
 
 ```javascript
 var a = 1;
 
 function foo() {
   var a = 2;
-
   console.log(this);
   console.log(this.a);
 }
 
 foo();
+```
 
-var obj = {
-  a: 2,
-  foo,
-};
+`foo`函数在全局作用域下执行，等价于`window.foo`，所以 this 指向 window。
 
+```bash
+Window{...}
+1
+```
+
+案例五
+
+```javascript
+var a = 1;
+
+function foo() {
+  var a = 2;
+  function inner() {
+    console.log(this.a);
+  }
+  inner();
+}
+
+foo();
+```
+
+`foo`函数在全局作用域下执行，等价于`window.foo`，`inner`函数的调用者还是 window。
+
+```bash
+1
+```
+
+### 隐式绑定
+
+案例一
+
+```javascript
+function foo() {
+  console.log(this.a);
+}
+
+var obj = { a: 1, foo };
+var a = 2;
 obj.foo();
 ```
 
-`foo`函数在全局作用域下执行，等价于`window.foo`，所以 this 指向 window。`obj.foo`函数由 obj 调用，所以 this 指向 obj。
+`foo`函数由 obj 调用，this 指向 obj。
+
+```bash
+1
+```
+
+### 隐式绑定的隐式丢失
+
+```javascript
+function foo() {
+  console.log(this.a);
+}
+
+var obj = { a: 1, foo };
+var a = 2;
+var foo2 = obj.foo;
+
+obj.foo();
+foo2();
+```
+
+`var foo2 = obj.foo`赋值会导致 this 绑定丢失，`foo2`函数在全局作用域下执行，等价于`window.foo2`。
+
+```bash
+1
+2
+```
+
+案例二
+
+```javascript
+function foo() {
+  console.log(this.a);
+}
+
+var obj = { a: 1, foo };
+var a = 2;
+var foo2 = obj.foo;
+var obj2 = { a: 3, foo2: obj.foo };
+
+obj.foo();
+foo2();
+obj2.foo2();
+```
+
+`obj2.foo2`函数在由 obj2 调用，指向 obj2。
+
+```bash
+1
+2
+3
+```
+
+案例三
+
+```javascript
+function foo() {
+  console.log(this.a);
+}
+
+function doFoo(fn) {
+  console.log(this);
+  fn();
+}
+
+var obj = { a: 1, foo };
+var a = 2;
+
+doFoo(obj.foo);
+```
+
+`obj.foo`作为`doFoo`的参数进行传递时 this 指向丢失，`obj.foo`等价于`window.foo`。
+
+```bash
+Window{...}
+2
+```
 
 案例四
 
 ```javascript
+function foo() {
+  console.log(this.a);
+}
+
+function doFoo(fn) {
+  console.log(this);
+  fn();
+}
+
+var obj = { a: 1, foo };
+var a = 2;
+var obj2 = { a: 3, doFoo };
+
+obj2.doFoo(obj.foo);
+```
+
+`obj.foo`作为`doFoo`的参数进行传递时 this 指向丢失。
+
+```bash
+{ a:3, doFoo: f }
+2
+```
+
+案例五
+
+```javascript
+'use strict';
+function foo() {
+  console.log(this.a);
+}
+
+function doFoo(fn) {
+  console.log(this);
+  fn();
+}
+
+var obj = { a: 1, foo };
+var a = 2;
+var obj2 = { a: 3, doFoo };
+
+obj2.doFoo(obj.foo);
+```
+
+严格模式，`obj.foo`作为`doFoo`的参数进行传递时 this 指向丢失，指向 undefined。
+
+```bash
+{ a:3, doFoo: f }
+Uncaught TypeError: Cannot read property 'a' of undefined
+```
+
+### 显式绑定
+
+案例一
+
+```javascript
+function foo() {
+  console.log(this.a);
+}
+
+var obj = { a: 1 };
+var a = 2;
+
+foo();
+foo.call(obj);
+foo.apply(obj);
+foo.bind(obj);
+```
+
+`foo`函数在全局作用域下执行，等价于`window.foo`，`call`和`apply`立即执行，`bind`只改变 this 指向。
+
+```bash
+2
+1
+1
+```
+
+案例二
+
+```javascript
+function foo() {
+  console.log(this.a);
+}
+
+var a = 2;
+
+foo.call();
+foo.call(null);
+foo.call(undefined);
+```
+
+call、bind 的第一个参数为空、null 和 undefined，该参数会被忽略。
+
+```bash
+2
+2
+2
+```
+
+案例三
+
+```javascript
+var obj1 = {
+  a: 1,
+};
+
 var obj2 = {
   a: 2,
   foo1: function () {
     console.log(this.a);
   },
   foo2: function () {
-    setTimeout(function () {
-      console.log(this);
-      console.log(this.a);
-    }, 0);
+    setTimeout(
+      function () {
+        console.log(this);
+        console.log(this.a);
+      }.call(obj1),
+      0
+    );
   },
 };
 
@@ -114,6 +357,198 @@ obj2.foo1();
 obj2.foo2();
 ```
 
-`obj2.foo1`和`obj2.foo2`均由 obj2 调用，`foo1`为 function 函数声明，所以不会影响 this 的指向，指向`obj2`；但是`foo2`的函数是作为 setTimeout 的参数，会发生作用域丢失的情况，所以 this 指向 window（严格模式指向 undefined）。
+`obj2.foo1`不是箭头函数，this 指向 obj2，`obj2.foo2`中作为 setTimeout 参数传递，本应该发生 this 指向丢失，但是 call 显式指定 this 绑定到 obj1 上。
 
-[其余 this 面试题](https://juejin.cn/post/6844904083707396109)
+```bash
+2
+{ a: 1 }
+1
+```
+
+案例四
+
+```javascript
+var obj1 = {
+  a: 1,
+};
+
+var obj2 = {
+  a: 2,
+  foo1: function () {
+    console.log(this.a);
+  },
+  foo2: function () {
+    function inner() {
+      console.log(this);
+      console.log(this.a);
+    }
+    inner.call(obj1);
+  },
+};
+
+var a = 3;
+
+obj2.foo1();
+obj2.foo2();
+```
+
+`inner`本指向 window，但是 call 显式指定 this 绑定到 obj1 上。
+
+```bash
+2
+{ a: 1 }
+1
+```
+
+案例五
+
+```javascript
+function foo() {
+  console.log(this.a);
+}
+
+var obj = { a: 1 };
+var a = 2;
+
+foo();
+foo.call(obj);
+foo().call(obj);
+```
+
+`foo`执行结果为 undefined。
+
+```bash
+2
+1
+2
+Uncaught TypeError: Cannot read property 'call' of undefined
+```
+
+案例六
+
+```javascript
+function foo() {
+  console.log(this.a);
+  return function () {
+    console.log(this.a);
+  };
+}
+
+var obj = { a: 1 };
+var a = 2;
+
+foo();
+foo.call(obj);
+foo().call(obj);
+```
+
+`foo`执行结果为 function。
+
+```bash
+2
+1
+2
+1
+```
+
+案例七
+
+```javascript
+function foo() {
+  console.log(this.a);
+  return function () {
+    console.log(this.a);
+  };
+}
+
+var obj = { a: 1 };
+var a = 2;
+
+foo();
+foo.bind(obj);
+foo().bind(obj);
+```
+
+bind 只改变 this 指向不执行。
+
+```bash
+2
+2
+```
+
+案例八
+
+```javascript
+function foo() {
+  console.log(this.a);
+  return function () {
+    console.log(this.a);
+  };
+}
+
+var obj = { a: 1 };
+var a = 2;
+
+foo.call(obj)();
+```
+
+首先通过 call 显式将 this 绑定到 obj 上，之后再将绑定后的函数在全局执行。
+
+```bash
+1
+2
+```
+
+案例九
+
+```javascript
+var obj = {
+  a: 'obj',
+  foo: function () {
+    console.log('foo:', this.a);
+    return function () {
+      console.log('inner:', this.a);
+    };
+  },
+};
+
+var a = 'window';
+var obj2 = { a: 'obj2' };
+
+obj.foo()();
+obj.foo.call(obj2)();
+obj.foo().call(obj2);
+```
+
+```bash
+foo: obj
+inner: window
+foo: obj2
+inner: window
+foo: obj
+inner: obj2
+```
+
+案例十
+
+```javascript
+var obj = {
+  a: 1,
+  foo: function (b) {
+    b = b || this.a;
+    return function (c) {
+      console.log(this.a + b + c);
+    };
+  },
+};
+
+var a = 2;
+var obj2 = { a: 3 };
+
+obj.foo(a).call(obj2, 1);
+obj.foo.call(obj2)(1);
+```
+
+```bash
+
+```
