@@ -549,6 +549,9 @@ obj.foo(a).call(obj2, 1);
 obj.foo.call(obj2)(1);
 ```
 
-```bash
+`obj.foo(a)`，参数值为 2，所以 b 为 2，使用 call 改变 this 指向，this 指向 obj2，this.a 为 3，c 为 1。`obj.foo`使用 call 改变 this 指向，this 指向 obj2，b 为 undefined，this.a 为 3，所以 b 为 3，之后在全局作用域下调用，所以 this.a 等价于 window.a，所以 this.a 为 2。
 
+```bash
+6
+6
 ```
