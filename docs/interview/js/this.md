@@ -555,3 +555,56 @@ obj.foo.call(obj2)(1);
 6
 6
 ```
+
+案例十一
+
+```javascript
+function foo1() {
+  console.log(this.a);
+}
+
+var a = 1;
+var obj = {
+  a: 2,
+};
+
+var foo2 = function () {
+  foo1.call(obj);
+};
+
+foo2();
+foo2.call(window);
+```
+
+虽然`foo2`是在全局作用域下调用，但是因为`foo1.call(obj)`使用 call 将 foo1 指向 obj，所以与 window 无关。即使通过 call 将`foo2`指向 window，也不能改变 foo1 的指向。
+
+```bash
+2
+2
+```
+
+案例十二
+
+```javascript
+function foo1(b) {
+  console.log(`${this.a} + ${b}`);
+  return this.a + b;
+}
+
+var a = 1;
+var obj = {
+  a: 2,
+};
+
+var foo2 = function () {
+  return foo1.call(obj, ...arguments);
+};
+
+var num = foo2(3);
+console.log(num);
+```
+
+```bash
+2 + 3
+5
+```
