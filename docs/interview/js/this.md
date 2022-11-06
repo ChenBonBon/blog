@@ -608,3 +608,180 @@ console.log(num);
 2 + 3
 5
 ```
+
+案例十三
+
+```javascript
+function foo(item) {
+  console.log(item, this.a);
+}
+
+var obj = {
+  a: 'obj',
+};
+
+var a = 'window';
+var arr = [1, 2, 3];
+
+arr.filter(function (i) {
+  console.log(i, this.a);
+  return i > 2;
+}, obj);
+```
+
+`forEach`、`map`、`filter`函数的第二个参数可以改变 this 指向，所以这里将 this 指向 obj。
+
+```bash
+1 obj
+2 obj
+3 obj
+```
+
+### new 绑定
+
+案例一
+
+```javascript
+function Person(name) {
+  this.name = name;
+}
+
+var name = 'window';
+var person1 = new Person('LinDaiDai');
+
+console.log(person1.name);
+```
+
+通过 new 创建对象，this 指向对象`Person`上。
+
+```bash
+LinDaiDai
+```
+
+案例二
+
+```javascript
+function Person(name) {
+  this.name = name;
+  this.foo1 = function () {
+    console.log(this.name);
+  };
+  this.foo2 = function () {
+    return function () {
+      console.log(this.name);
+    };
+  };
+}
+
+var person1 = new Person('person1');
+
+person1.foo1();
+person1.foo2()();
+```
+
+`foo1`由 person1 调用，this 指向 person1，person1 通过 new 创建对象，指向对象 Person。`foo2()`由 window 调用，this 指向 window。
+
+```bash
+person1
+undefined
+```
+
+案例三
+
+```javascript
+var name = 'window';
+
+function Person(name) {
+  this.name = name;
+  this.foo = function () {
+    console.log(this.name);
+    return function () {
+      console.log(this.name);
+    };
+  };
+}
+
+var person2 = {
+  name: 'person2',
+  foo: function () {
+    console.log(this.name);
+    return function () {
+      console.log(this.name);
+    };
+  },
+};
+
+var person1 = new Person('person1');
+person1.foo()();
+person2.foo()();
+```
+
+`person1.foo`由 person1 调用，this 指向 person1，person1 通过 new 创建对象，指向对象 Person。
+
+```bash
+person1
+window
+person2
+window
+```
+
+案例四
+
+```javascript
+var name = 'window';
+
+function Person(name) {
+  this.name = name;
+  this.foo = function () {
+    console.log(this.name);
+    return function () {
+      console.log(this.name);
+    };
+  };
+}
+
+var person1 = new Person('person1');
+var person2 = new Person('person2');
+
+person1.foo.call(person2)();
+person1.foo().call(person2);
+```
+
+```bash
+person2
+window
+person1
+person2
+```
+
+### 箭头函数绑定
+
+案例一
+
+```javascript
+var obj = {
+  name: 'obj',
+  foo1: () => {
+    console.log(this.name);
+  },
+  foo2: function () {
+    console.log(this.name);
+    return () => {
+      console.log(this.name);
+    };
+  },
+};
+
+var name = 'window';
+
+obj.foo1();
+obj.foo2()();
+```
+
+`foo1`为箭头函数，指向父级作用域，obj 为对象，作用域为 window，所以`foo1`的作用域指向 window。
+
+```bash
+window
+obj
+obj
+```
