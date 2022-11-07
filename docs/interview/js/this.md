@@ -778,10 +778,191 @@ obj.foo1();
 obj.foo2()();
 ```
 
-`foo1`为箭头函数，指向父级作用域，obj 为对象，作用域为 window，所以`foo1`的作用域指向 window。
+`foo1`为箭头函数，指向父级作用域，obj 为对象，作用域为 window，所以`foo1`的 this 指向 window。
 
 ```bash
 window
 obj
 obj
+```
+
+案例二
+
+```javascript
+var name = 'window';
+
+var obj1 = {
+  name: 'obj1',
+  foo: function () {
+    console.log(this.name);
+  },
+};
+
+var obj2 = {
+  name: 'obj2',
+  foo: () => {
+    console.log(this.name);
+  },
+};
+
+obj1.foo();
+obj2.foo();
+```
+
+`obj1.foo`为普通函数，指向 obj1。`obj2.foo`为箭头函数，指向父级作用域，obj2 为对象，作用域为 window，所以`obj2.foo`的 this 指向 window。
+
+```bash
+obj1
+window
+```
+
+案例三
+
+```javascript
+var name = 'window';
+
+var obj1 = {
+  name: 'obj1',
+  foo: function () {
+    console.log(this.name);
+    return function () {
+      console.log(this.name);
+    };
+  },
+};
+
+var obj2 = {
+  name: 'obj2',
+  foo: function () {
+    console.log(this.name);
+    return () => {
+      console.log(this.name);
+    };
+  },
+};
+
+var obj3 = {
+  name: 'obj3',
+  foo: () => {
+    console.log(this.name);
+    return function () {
+      console.log(this.name);
+    };
+  },
+};
+
+var obj4 = {
+  name: 'obj4',
+  foo: () => {
+    console.log(this.name);
+    return () => {
+      console.log(this.name);
+    };
+  },
+};
+
+obj1.foo()();
+obj2.foo()();
+obj3.foo()();
+obj4.foo()();
+```
+
+```bash
+obj1
+window
+obj2
+obj2
+window
+window
+window
+window
+```
+
+案例四
+
+```javascript
+var name = 'window';
+
+function Person(name) {
+  this.name = name;
+  this.foo1 = function () {
+    console.log(this.name);
+  };
+  this.foo2 = () => {
+    console.log(this.name);
+  };
+}
+
+var person2 = {
+  name: 'person2',
+  foo2: () => {
+    console.log(this.name);
+  },
+};
+var person1 = new Person('person1');
+person1.foo1();
+person1.foo2();
+person2.foo2();
+```
+
+`person1`为函数作用域，`person2`为普通对象，作用域为 window。
+
+```bash
+person1
+person1
+window
+```
+
+案例五
+
+```javascript
+var name = 'window';
+
+function Person(name) {
+  this.name = name;
+  this.foo1 = function () {
+    console.log(this.name);
+    return function () {
+      console.log(this.name);
+    };
+  };
+  this.foo2 = function () {
+    console.log(this.name);
+    return () => {
+      console.log(this.name);
+    };
+  };
+  this.foo3 = () => {
+    console.log(this.name);
+    return function () {
+      console.log(this.name);
+    };
+  };
+  this.foo4 = () => {
+    console.log(this.name);
+    return () => {
+      console.log(this.name);
+    };
+  };
+}
+
+var person1 = new Person('person1');
+
+person1.foo1()();
+person1.foo2()();
+person1.foo3()();
+person1.foo4()();
+```
+
+`person1`通过 new 创建对象，指向 Person。
+
+```bash
+person1
+window
+person1
+person1
+person1
+window
+person1
+person1
 ```
