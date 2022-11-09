@@ -966,3 +966,229 @@ window
 person1
 person1
 ```
+
+案例六
+
+```javascript
+var name = 'window';
+
+var obj1 = {
+  name: 'obj1',
+  foo1: function () {
+    console.log(this.name);
+    return () => {
+      console.log(this.name);
+    };
+  },
+  foo2: () => {
+    console.log(this.name);
+    return function () {
+      console.log(this.name);
+    };
+  },
+};
+
+var obj2 = {
+  name: 'obj2',
+};
+
+obj1.foo1.call(obj2)();
+obj1.foo1().call(obj2);
+obj1.foo2.call(obj2)();
+obj1.foo2().call(obj2);
+```
+
+箭头函数的 this 无法通过 bind、call、apply 来直接修改，但是可以通过改变作用域中 this 的指向来间接修改。
+
+```bash
+obj2
+obj2
+obj1
+obj1
+window
+window
+window
+obj2
+```
+
+### 综合题
+
+案例一
+
+```javascript
+var name = 'window';
+
+var person1 = {
+  name: 'person1',
+  foo1: function () {
+    console.log(this.name);
+  },
+  foo2: () => console.log(this.name),
+  foo3: function () {
+    return function () {
+      console.log(this.name);
+    };
+  },
+  foo4: function () {
+    return () => {
+      console.log(this.name);
+    };
+  },
+};
+
+var person2 = { name: 'person2' };
+
+person1.foo1();
+person1.foo1.call(person2);
+
+person1.foo2();
+person1.foo2.call(person2);
+
+person1.foo3()();
+person1.foo3.call(person2)();
+person1.foo3().call(person2);
+
+person1.foo4()();
+person1.foo4.call(person2)();
+person1.foo4().call(person2);
+```
+
+```bash
+person1
+person2
+
+window
+window
+
+window
+window
+person2
+
+person1
+person2
+person1
+```
+
+案例二
+
+```javascript
+var name = 'window';
+
+function Person(name) {
+  this.name = name;
+  this.foo1 = function () {
+    console.log(this.name);
+  };
+  this.foo2 = () => console.log(this.name);
+  this.foo3 = function () {
+    return function () {
+      console.log(this.name);
+    };
+  };
+  this.foo4 = function () {
+    return () => {
+      console.log(this.name);
+    };
+  };
+}
+
+var person1 = new Person('person1');
+var person2 = new Person('person2');
+
+person1.foo1();
+person1.foo1.call(person2);
+
+person1.foo2();
+person1.foo2.call(person2);
+
+person1.foo3()();
+person1.foo3.call(person2)();
+person1.foo3().call(person2);
+
+person1.foo4()();
+person1.foo4.call(person2)();
+person1.foo4().call(person2);
+```
+
+```bash
+person1
+person2
+
+person1
+person1
+
+window
+window
+person2
+
+person1
+person2
+person1
+```
+
+案例三
+
+```javascript
+var name = 'window';
+
+function Person(name) {
+  this.name = name;
+  this.obj = {
+    name: 'obj',
+    foo1: function () {
+      return function () {
+        console.log(this.name);
+      };
+    },
+    foo2: function () {
+      return () => {
+        console.log(this.name);
+      };
+    },
+  };
+}
+
+var person1 = new Person('person1');
+var person2 = new Person('person2');
+
+person1.obj.foo1()();
+person1.obj.foo1.call(person2)();
+person1.obj.foo1().call(person2);
+
+person1.obj.foo2()();
+person1.obj.foo2.call(person2)();
+person1.obj.foo2().call(person2);
+```
+
+`foo1`和`foo2`都是由 obj 进行调用，默认指向 obj。
+
+```bash
+window
+window
+person2
+
+obj
+person2
+obj
+```
+
+案例四
+
+```javascript
+function foo() {
+  console.log(this.a);
+}
+
+var a = 2;
+
+(function () {
+  'use strict';
+  foo();
+})();
+```
+
+调用`foo`函数的是 window，所以`foo`中的 this 依旧是 window。
+
+```bash
+2
+```
