@@ -43,6 +43,7 @@ export default defineUserConfig({
               { text: '执行上下文和执行栈', link: '/interview/js/context' },
               { text: '作用域', link: '/interview/js/scope' },
               { text: 'this', link: '/interview/js/this' },
+              { text: 'call、apply和bind', link: '/interview/js/call' },
             ],
           },
         ],
