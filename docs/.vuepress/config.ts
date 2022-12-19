@@ -44,6 +44,7 @@ export default defineUserConfig({
               { text: '作用域', link: '/interview/js/scope' },
               { text: 'this', link: '/interview/js/this' },
               { text: 'call、apply和bind', link: '/interview/js/call' },
+              { text: '闭包', link: '/interview/js/closure' },
             ],
           },
         ],
