@@ -14,11 +14,45 @@
 
 1. 可以让局部变量的值始终保存在内存中
 
-2. 对内部变量进行保护，使外部访问不到
+2. 对内部变量进行保护，使外部访问不到（如防抖和节流）
+
+### 防抖
+
+```javascript
+function debounce(fn, wait = 300) {
+  let timer;
+
+  return function (...args) {
+    if (timer) {
+      clearTimeout(timer);
+    } else {
+      timer = setTimeout(() => {
+        fn.apply(this, args);
+      }, wait);
+    }
+  };
+}
+```
+
+### 节流
+
+```javascript
+function throttle(fn, wait = 300) {
+  let previous = 0;
+
+  return function (...args) {
+    const now = +new Date();
+    if (now - previous > wait) {
+      previous = now;
+      fn.apply(this, args);
+    }
+  };
+}
+```
 
 ## 滥用闭包的副作用
 
-闭包中引用的变量直到闭包被销毁时才会被垃圾回收，不合理的使用闭包，会造成内存泄露(就是该内存空间使用完毕之后未被回收)
+闭包中引用的变量直到闭包被销毁时才会被垃圾回收，不合理的使用闭包，会造成内存泄露（就是该内存空间使用完毕之后未被回收）
 
 ```javascript
 // 原始题目
