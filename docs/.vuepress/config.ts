@@ -46,6 +46,7 @@ export default defineUserConfig({
               { text: 'call、apply和bind', link: '/interview/js/call' },
               { text: '闭包', link: '/interview/js/closure' },
               { text: '原型和原型链', link: '/interview/js/prototype' },
+              { text: 'Class', link: '/interview/js/class' },
             ],
           },
         ],
