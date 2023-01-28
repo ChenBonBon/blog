@@ -61,6 +61,7 @@ export default {
   border-top-left-radius: 3px;
   border-bottom-left-radius: 3px;
   overflow: hidden;
+  color: #ffffff;
 }
 .password-input + label:before,
 .password-input + label:after {
