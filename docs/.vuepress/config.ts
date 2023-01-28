@@ -48,6 +48,7 @@ export default defineUserConfig({
               { text: '原型和原型链', link: '/interview/js/prototype' },
               { text: 'Class', link: '/interview/js/class' },
               { text: 'Promise', link: '/interview/js/promise' },
+              { text: 'async/await', link: '/interview/js/async' },
             ],
           },
         ],
