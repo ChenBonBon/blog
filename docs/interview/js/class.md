@@ -328,7 +328,7 @@ class Person {
     try {
       obj.#username;
       return true;
-    } catch {
+    } catch (err) {
       return false;
     }
   }
