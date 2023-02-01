@@ -50,6 +50,7 @@ export default defineUserConfig({
               { text: 'Promise', link: '/interview/js/promise' },
               { text: 'async/await', link: '/interview/js/async' },
               { text: '深拷贝', link: '/interview/js/clone' },
+              { text: 'Event Loop', link: '/interview/js/event-loop' },
             ],
           },
         ],
