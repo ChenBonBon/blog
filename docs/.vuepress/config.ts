@@ -49,6 +49,7 @@ export default defineUserConfig({
               { text: 'Class', link: '/interview/js/class' },
               { text: 'Promise', link: '/interview/js/promise' },
               { text: 'async/await', link: '/interview/js/async' },
+              { text: '深拷贝', link: '/interview/js/clone' },
             ],
           },
         ],
