@@ -51,6 +51,7 @@ export default defineUserConfig({
               { text: 'async/await', link: '/interview/js/async' },
               { text: '深拷贝', link: '/interview/js/clone' },
               { text: 'Event Loop', link: '/interview/js/event-loop' },
+              { text: '设计模式', link: '/interview/js/design-pattern' },
             ],
           },
         ],
