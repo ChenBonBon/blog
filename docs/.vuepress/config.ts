@@ -52,6 +52,7 @@ export default defineUserConfig({
               { text: '深拷贝', link: '/interview/js/clone' },
               { text: 'Event Loop', link: '/interview/js/event-loop' },
               { text: '设计模式', link: '/interview/js/design-pattern' },
+              { text: 'Web Workers', link: '/interview/js/web-workers' },
             ],
           },
         ],
