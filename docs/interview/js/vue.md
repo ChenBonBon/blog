@@ -183,3 +183,95 @@ class Dep {
   }
 }
 ```
+
+## v-show 和 v-if
+
+### v-show 和 v-if 的共同点
+
+都可以控制元素的显示和隐藏，使用方法也是一样。
+
+### v-show 和 v-if 的区别
+
+v-show 是通过切换 css display 的方式来控制显示和隐藏，v-if 是通过挂载、卸载 DOM 节点的方式来控制显示和隐藏。v-show 有更高的初始渲染消耗，v-if 有更高的切换消耗。
+
+### v-show 和 v-if 的原理
+
+v-show 是判断是否有 transition，如果有 transtion 则优先执行 transition，之后根据 v-show 的值来控制 display 为 none 还是空；
+v-if 是返回一个 render 函数，根据 v-if 的值来控制 render 函数渲染的内容。
+
+### v-show 和 v-if 的使用场景
+
+需要频繁切换的使用 v-show，不需要频繁切换的使用 v-if。
+
+## Vue 实例挂载的过程
+
+1. 调用\_init 方法
+   - 定义$set、$get、$delete、$watch 等方法
+   - 定义$on、$off、$emit 等事件
+   - 定义\_update、$beforeDestory 等生命周期
+2. 调用$mount 方法进行页面的挂载
+3. 定义 updateComponent 函数
+4. 执行 render 方法生成虚拟 DOM
+5. \_update 方法将虚拟 DOM 生成真实 DOM 并渲染到页面
+
+## Vue 的生命周期
+
+### 什么是生命周期
+
+Vue 实例从创建到销毁的整个过程。
+
+### Vue 有哪些生命周期
+
+beforeCreate、created、beforeMount、mounted、beforeUpdate、updated、beforeDestory、destoryed、actived、deactived、errorCaptured
+
+### Vue 生命周期的具体流程
+
+1. beforeCreate
+
+初始化实例，进行 initData 和 initMethod。
+
+2. created
+
+data 和 method 初始化完成，可以访问，vm.$el 不可访问。
+
+3. beforeMount
+
+将 template 编译为虚拟 DOM，此时 vm.$el 依然为旧的 DOM 节点。
+
+4. mounted
+
+将编译好的虚拟 DOM 生成为真实 DOM 并渲染到页面，此时 vm.$el 已经变为新的 DOM 节点。
+
+5. beforeUpdate
+
+与 beforeMount 类似，要更新到内容编译为虚拟 DOM，在 beforeUpdate 阶段修改数据，不会再次触发 beforeUpdate。
+
+6. updated
+
+与 mounted 类似，vm.$el 变为更新后的 DOM 节点，在 updated 阶段修改数据，会再次触发 beforeUpdate。
+
+7. beforeDestory
+
+销毁实例之前，此时所有实例的属性和方法均可访问。
+
+8. destoryed
+
+完全销毁实例之后，此时实例的属性和方法不可访问，绑定的事件监听器全部清除，但是仅仅销毁了实例，并不能清除 DOM。
+
+### 数据请求放在 created 和 mounted 的区别
+
+created 和 mounted 阶段均可访问实例的 data 和 method，但是 mounted 阶段由于 DOM 已经渲染完成，所以接口数据返回后可能会导致页面的重新渲染或闪动，所以建议放在 created 中。
+
+## 为什么 v-if 和 v-for 不建议一起使用
+
+因为 v-if 和 v-for 放在同一个标签中时，v-for 的优先级会高于 v-if，导致每次条件判断之前都会进行循环，造成不必要的性能浪费。如果需要 v-if 的优先级高于 v-for，可以在 v-for 的标签外包一层 template，对 template 使用 v-if，如果条件判断在 v-for 内部，则可以通过 computed 计算是否满足条件。
+
+## 为什么 data 属性是一个函数而不是对象
+
+Vue 实例定义 data 属性时可以是函数也可以是对象，但是组件实例定义 data 属性只能是函数，原因是 Vue 实例为单例模式，不会出现数据污染的情况；而组件实例不能是单例模式，必须每次返回一个全新的 data 对象，所以必须使用函数的形式。
+
+## Vue 中给对象添加一个新属性页面没有同步更新
+
+因为 Vue2 中是通过`Object.defineProperty`的方式实现响应式的，对于一个对象上没有的属性，getter 与 setter 自然无法响应，所以页面不会同步更新。
+可以使用 Vue.set、Object.assign 和 forceUpdate 解决。
+对于 Vue3 而言，由于使用 Proxy 实现响应式，所以不存在新增属性页面不同步的情况。
