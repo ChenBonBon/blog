@@ -81,3 +81,42 @@ class Router {
 2. 通过 URL rewrite 做静态化，将外部请求的 URL 重定向到动态页面地址
 
 3. 通过 Nginx 判断请求来源是否为爬虫，如果是爬虫则转发到 node server，将完整的 HTML 解析后返回
+
+## SPA 首屏加载速度慢怎么优化
+
+### 首屏加载时间如何计算
+
+1. 使用 DOMContentLoaded
+
+```javascript
+document.addEventListener(
+  'DOMContentLoaded',
+  (e) => {
+    console.log('loaded');
+  },
+  false
+);
+```
+
+2. 使用 performance
+
+```javascript
+console.log(performance.getEntriesByName('first-contentful-paint')[0]);
+```
+
+### 首屏加载速度慢的原因
+
+1. 网络延时
+2. 资源体积过大
+3. 资源重复请求
+4. 渲染被阻塞
+
+### 首屏加载速度慢的优化方案
+
+1. 使用路由懒加载，比如 React.lazy，对未请求的路由进行动态 import
+2. 对静态资源本地缓存，比如 Service Worker、HTTP 缓存等
+3. 使用 webpack 的 minChunks，避免对多个页面都用到的代码重复打包
+4. UI 框架按需加载
+5. 减少 HTTP 请求的数量，比如使用雪碧图或 iconfont
+6. 开启 gzip 压缩
+7. 使用 SSR
