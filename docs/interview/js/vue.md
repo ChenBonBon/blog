@@ -275,3 +275,37 @@ Vue 实例定义 data 属性时可以是函数也可以是对象，但是组件�
 因为 Vue2 中是通过`Object.defineProperty`的方式实现响应式的，对于一个对象上没有的属性，getter 与 setter 自然无法响应，所以页面不会同步更新。
 可以使用 Vue.set、Object.assign 和 forceUpdate 解决。
 对于 Vue3 而言，由于使用 Proxy 实现响应式，所以不存在新增属性页面不同步的情况。
+
+## Vue 的组件和插件
+
+### 组件
+
+每一个 vue 文件都可以看成是一个组件
+
+### 插件
+
+为 Vue 添加全局功能的库
+
+### 组件和插件的区别
+
+1. 注册方式不同
+
+插件通过 Vue.use 进行注册，组件通过 Vue.component 注册。
+
+2. 编写形式不同
+
+插件需要暴露一个 install 方法，而组件可以直接 export 一个 template 标签包裹的组件或者使用 Vue.template 生成。
+
+3. 使用场景不同
+
+插件一般是用来丰富 Vue 的功能，组件一般是构成应用的功能。
+
+## Vue 组件间通信方式
+
+1. props 传值
+2. $emit 触发自定义事件
+3. $emit和$on
+4. ref 获取子组件实例数据
+5. $attrs和$listners
+6. provide 和 inject
+7. vuex
