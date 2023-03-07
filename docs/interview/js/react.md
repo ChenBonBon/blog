@@ -297,3 +297,66 @@ React 的生命周期包括三个部分，包括
 - 应该放在`componentDidMount`中进行
 - 不应该放在`constructor`中，因为`constructor`准确来说是用来初始化属性的，并不是一个生命周期
 - 不应该放在`componentWillMount`中进行，因为`componentWillMount`已经废弃，由于在渲染过程中可能会多次触发，会导致接口多次调用
+
+## 类组件与函数组件的异同
+
+### 相同点
+
+1. 用法类似，无论是类组件还是函数组件，在引入、调用时的方式是类似的
+2. 呈现效果和性能类似
+
+### 不同点
+
+1. 设计思想不同，类组件是 OOP 思想，函数组件是 FP 思想
+2. 使用场景不同，如果是需要用到生命周期，那么 class 组件更优
+3. 设计模式不同，类组件是继承的思想，而函数组件是组合的思想
+4. 未来趋势，由于类组件的生命周期的复杂性，导致在性能优化上存在劣势，函数组件由于 hooks 加持更利于逻辑复用，逐渐成为未来的趋势。
+
+## React 怎么设计组件
+
+1. 展示组件
+
+- 代理组件，如封装 antd 的 Button
+- 样式组件，通过 props 中的属性来修改 class
+- 布局组件，如 Layout
+
+2. 业务组件
+
+- 容器组件，如接口调用和 set 数据，之后将 state 作为 props 传入展示组件
+- 高阶组件，参数是组件，返回值是组件的组件，比如埋点，可以在高阶组件的`componentDidMount`中执行，而与传入的子组件无关
+
+## setState 是同步还是异步更新
+
+- 合成事件，React 中事件绑定是放在每个 JSX 标签上，React 会将所有的事件收集，React17 之前会绑定到 html 节点，React17 之后会绑定到`ReactDOM.render`函数指定的节点。当触发事件时，React 会模拟事件触发和冒泡。
+
+- 当在 React 的生命周期和合成事件中，setState 是异步的。
+
+- 当在 JavaScript 的原生事件中，如 addEventListener、setTimeout、setInterval 中，setState 是同步的。
+
+```javascript
+class TestSetState extends React.Component {
+  state = {
+    count: 0,
+  };
+
+  componentDidMount() {
+    setState({ count: this.state.count + 1 });
+    console.log(this.state.count);
+    setState({ count: this.state.count + 1 });
+    console.log(this.state.count);
+
+    setTimeout(() => {
+      setState({ count: this.state.count + 1 });
+      console.log(this.state.count);
+      setState({ count: this.state.count + 1 });
+      console.log(this.state.count);
+    }, 0);
+  }
+
+  render() {
+    return null;
+  }
+}
+```
+
+以上的代码，首先前两个`setState`，由于是在生命周期中，所以是异步执行的，`console.log`执行时`count`的值没有发生变化，所以是 0 和 0。之后的两个`setState`，由于是在 setTimeout 中，所以是同步执行的。由于 setTimeout 是一个宏任务，是在`setState`执行成功之后执行的，所以此时`count`的值为 1，由于同步，所以输出为 2 和 3。
