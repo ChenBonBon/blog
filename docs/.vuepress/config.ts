@@ -56,7 +56,13 @@ export default defineUserConfig({
               { text: 'utils', link: '/interview/js/utils' },
               { text: 'Vue', link: '/interview/js/vue' },
               { text: 'SPA', link: '/interview/js/spa' },
+              { text: 'ES6', link: '/interview/js/es6' },
+              { text: 'React', link: '/interview/js/react' },
             ],
+          },
+          {
+            text: 'Solidity',
+            children: [{ text: 'Solidity', link: '/solidity/solidity' }],
           },
         ],
       },
