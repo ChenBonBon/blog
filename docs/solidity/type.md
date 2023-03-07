@@ -1,26 +1,6 @@
-# Solidity
+# 类型
 
-## 简述
-
-Solidity 是以太坊虚拟机(EVM)智能合约的语言。
-
-## Hello World
-
-```solidity
-// SPDX-License-Identifier: MIT;
-pragma solidity ^0.8.18;
-contract HelloWorld {
-    string public _string = "Hello World";
-}
-```
-
-第一行是注释，与 JavaScript 类似，使用`//`的方式进行注释，编译时注释的内容会被忽略。这里声明了代码的使用许可为 MIT，如果不写 License 编译时会提示 warning。
-第二行声明了源文件执行的 solidity 版本，要不低于 0.8.18 且不高于 0.9.0。
-第三行和第四行是合约部分，`contract`关键字声明了一个名为 HelloWorld 的智能合约，`string`关键字声明了一个名为`_string`的字符串，并给它赋值为`Hello World`。
-
-## 类型
-
-### 数值类型
+## 数值类型
 
 1. 布尔型 bool
 
@@ -127,7 +107,7 @@ function enumToUint() external view returns(uint) {
 }
 ```
 
-### 函数类型
+## 函数类型
 
 Solidity 中函数类型 function 属于数值类型，其基本格式如下。
 
@@ -161,7 +141,7 @@ function get_number() public view returns(int number) {
 
 如上所示，`pure`对合约内部变量不可读不可写，所以只能对入参进行操作，`view`对合约内部变量可读不可写，所以可以新生成一个变量进行操作。
 
-#### 函数返回值
+### 函数返回值
 
 Solidity 的函数返回值包括`returns`和`return`两个关键字，其中`returns`是用在`function`声明语句中，而`return`是用在函数体内部。
 
@@ -173,7 +153,7 @@ function returnMultiple() public pure returns(uint256, bool, uint256[3] memory) 
 
 如上所示，函数`returnMultiple`定义了三个返回值的类型，分别是`uint256`、`bool`和`uint256[3] memory`。
 
-#### 命名式返回
+### 命名式返回
 
 Solidity 还支持命名式返回，如下所示。
 
@@ -187,7 +167,7 @@ function returnMultiple() public pure returns(uint256 _number, bool _bool, uint2
 
 如上所示，在定义函数返回值时，不仅定义了返回值的类型，还定义了返回值的名字，这样在函数体内部可以不用`return`关键字，直接对变量进行赋值即可。当然，`return`关键字也是可以使用的。
 
-#### 解构式赋值
+### 解构式赋值
 
 Solidity 的函数返回值支持解构式赋值，如下所示。
 
@@ -201,11 +181,11 @@ Solidity 的函数返回值支持解构式赋值，如下所示。
 (, _bool ,) = returnMultiple();
 ```
 
-### 引用类型
+## 引用类型
 
 Solidity 包含三种引用类型，分别是数组`array`、结构体`struct`和映射`mapping`。引用类型占空间大，赋值的时候不是传值而是传引用。
 
-#### 数据位置
+### 数据位置
 
 Solidity 的数据位置包括`storage`、`memory`和`calldata`三种，`storage`是存储在链上，`memory`和`calldata`是存储在内存中。存储在链上消耗 gas 多，存储在内存中消耗的 gas 较少。
 
@@ -221,14 +201,14 @@ function calldataArray(uint[] calldata _calldata) public pure returns(uint[] cal
 
 如上所示，如果对`_calldata`进行修改会报错。
 
-#### 数据位置和赋值规则
+### 数据位置和赋值规则
 
 1. 合约里的`storage`变量赋值给函数里的`storage`变量，会创建引用，修改时会同步修改原变量；
 2. `storage`类型赋值给`memory`类型，会创建独立副本，修改时不会同步修改原变量；
 3. `memory`类型赋值给`memory`类型，会创建引用，修改时会同步修改原变量；
 4. 其他情况，赋值给`storage`，会创建独立副本，修改时不会同步修改原变量。
 
-#### 变量的作用域
+### 变量的作用域
 
 1. 状态变量
 
@@ -264,3 +244,62 @@ function global() external view returns(address, uint, bytes memory){
 ```
 
 如上所示，`msg.sender`、`block.number`和`msg.data`均为全局变量。
+
+### 数组
+
+Solidity 中的数组`array`分为固定长度数组和可变长度数组两类，与 JavaScript 中的数组不同，Solidity 中的数组只能存储某一类型的数据，不能混存。
+
+1. 固定长度数组
+
+```solidity
+uint[8] array1;
+bytes1[3] array2;
+address[100] array3;
+```
+
+2. 可变长度数组
+
+可变长度数组形如 T[]，其中 T 是具体的某个类型，其中 bytes 是个例外，后面不需要跟[]。
+
+```solidity
+uint[] array4;
+bytes1[] array5;
+address[] array6;
+bytes array7;
+```
+
+#### 创建数组
+
+对于`memory`修饰的动态数组，可以通过`new`关键字进行创建，但是必须指定数组的长度，并且声明后数组长度不能变化。
+
+```solidity
+function f1(uint[3] memory) public pure {
+    //...
+}
+
+function f2() public pure {
+    f1([1, 2, 3]);
+}
+```
+
+> 如上所示，如果没有声明数组的类型，默认是以第一个元素为准。例如`[1,2,3]`，第一个元素 1 是 uint 类型，但是因为没有指定 type，所以默认会是 uint 的最小单位，即 uint8，所以`[1,2,3]`等价于`uint8[3]`，需要进行动态转换`[uint(1), 2, 3]`。
+
+如果创建的是动态数组，需要一个个进行赋值。
+
+#### 数组成员
+
+- length 获取数组长度
+- push() 向数组的最后插入 0
+- push(x) 向数组的最后插入 x
+- pop() 移除数组的最后一个元素
+
+### 结构体
+
+Solidity 中的结构体 struct 可以用来创建自定义数据结构。
+
+```solidity
+struct Persion {
+    bytes name;
+    uint age;
+}
+```

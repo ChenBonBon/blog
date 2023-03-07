@@ -252,3 +252,48 @@ path.replaceWith(t.inherits(callExpr, path.node));
 ```
 
 在处理完后，会调用 replaceWith 方法，将旧的 AST 替换为使用 React.createElement 的 AST 结构。之后在 generate 阶段将 AST 转换为 JavaScript，整个过程就结束了。
+
+## React 的生命周期
+
+> `functional component`是没有生命周期的概念的，只能模拟生命周期。
+
+React 的生命周期包括三个部分，包括
+
+- 挂载，组件从初始化到完成加载的过程
+- 更新
+- 卸载
+
+其中挂载阶段包括以下调用函数
+
+- `getDerivedStateFromProps`，当组件的 props 发生变化时更新 state，当父组件传入的 props、组件的 state 和调用 forceUpdate 时触发
+- `UNSAFE_componentWillMount`，由于 React 异步渲染机制可能会导致多次调用已废弃
+- `render`，返回 JSX
+- `componentDidMount`，当组件加载完成时触发
+
+更新阶段包括以下调用函数
+
+- `UNSAFE_componentWillReceiveProps`，被 `getDerivedStateFromProps` 替代
+- `getDerivedStateFromProps`
+- `shouldComponentUpdate`，用来比较 props 和 state 是否发生变化来进行性能优化
+- `UNSAFE_componentWillUpdate`
+- `render`
+- `componentDidUpdate`，第三个参数为一个 snapshot，可以由 `getSnapshotBeforeUpdate` 获得
+
+卸载阶段包括以下调用函数
+
+- `componentWillUnmount`，组件卸载前触发
+
+### React 生命周期中常见的坑
+
+1. 使用 `UNSAFE_componentWillMount`，在该函数中调用接口请求，可能会多次调用
+2. 不恰当地使用 `shouldComponentUpdate` 进行性能优化
+3. 使用 `UNSAFE_componentWillUpdate`，在该函数中的代码由于渲染机制会中断执行
+4. 没有在 `componentWillUnmount` 中销毁定时器，导致定时器一直在运行
+5. `render` 函数不是一个纯函数，如果在 `render` 函数中操作 state，会导致死循环，如果在 `render` 函数中绑定事件，会导致事件多次注册
+6. 未使用 `ErrorBoundary` 和 `ComponentDidCatch` 进行错误捕获
+
+### 接口调用应该放在哪个生命周期中进行
+
+- 应该放在`componentDidMount`中进行
+- 不应该放在`constructor`中，因为`constructor`准确来说是用来初始化属性的，并不是一个生命周期
+- 不应该放在`componentWillMount`中进行，因为`componentWillMount`已经废弃，由于在渲染过程中可能会多次触发，会导致接口多次调用

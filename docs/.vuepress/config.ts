@@ -62,7 +62,10 @@ export default defineUserConfig({
           },
           {
             text: 'Solidity',
-            children: [{ text: 'Solidity', link: '/solidity/solidity' }],
+            children: [
+              { text: '简述', link: '/solidity/1' },
+              { text: '类型', link: '/solidity/type' },
+            ],
           },
         ],
       },
