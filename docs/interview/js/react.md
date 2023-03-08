@@ -360,3 +360,171 @@ class TestSetState extends React.Component {
 ```
 
 以上的代码，首先前两个`setState`，由于是在生命周期中，所以是异步执行的，`console.log`执行时`count`的值没有发生变化，所以是 0 和 0。之后的两个`setState`，由于是在 setTimeout 中，所以是同步执行的。由于 setTimeout 是一个宏任务，是在`setState`执行成功之后执行的，所以此时`count`的值为 1，由于同步，所以输出为 2 和 3。
+
+## React 组件通信
+
+1. 父与子组件通信
+
+- 父组件向子组件传递 props
+
+2. 子与父组件通信
+
+- 父组件向子组件传递 callback
+- 父组件向子组件传递 ref，通过 ref 调用子组件的函数
+
+3. 兄弟组件通信
+
+- 将 state 放在父组件中，由父组件向子组件传递 props
+
+4. 无关系组件通信
+
+- context
+- window 变量或者全局事件
+- redux、flux 等状态管理框架
+
+## React 的状态管理框架
+
+1. Flux
+
+提出了单项数据流的概念，包括`Store`、`View`、`Dispatcher`和`Action`四部分，所有数据都位于`Store`中，当`View`发生变化时，会触发对应的`Action`，`Dispatcher`收集到触发的`Action`后，对`Store`中的数据进行更新，最终完成了`View`的更新。
+
+2. Redux
+
+与 Flux 不同的是提出了单一数据源、纯函数`Reducer`和数据只能通过`Action`修改的概念。如果要处理副作用，可以使用`react-thunk`或`react-saga`等中间件。
+
+```javascript
+function createThunkMiddleware(extraArugment) {
+  return ({ dispatch, getState }) =>
+    (next) =>
+    (action) => {
+      if (typeof action === 'function') {
+        return action(dispatch, getState, extraArgument);
+      }
+
+      return next(action);
+    };
+}
+```
+
+`react-thunk`判断 action 的类型是否为函数，如果是函数的话，将 dispatch 和 getState 作为参数传入并执行该函数，然后将返回的值交由 reducer 进行处理。这样就保证 reducer 依然是一个纯函数。
+
+3. Mobx
+
+提供了与 Vuex 类似的语法，包括`observer`、`obserable`等注解，实现思想也与 Vue 类似，Mobx5 之前使用`Object.defineProperty`实现响应式，Mobx5 之后版本使用`Proxy`实现响应式。但是由于 React 强调单一数据流的概念，所以一般还需要搭配`immutable.js`来保证只能通过 action 修改 state 的值。
+
+## 什么是虚拟 DOM
+
+虚拟 DOM 最早由 Facebook 的 XHP 语言提出，主要是为了简化前端开发和避免 XSS 攻击。之后 React 沿用了虚拟 DOM 的技术方案。我们在写 React 代码的时候，一般组件里`render`函数会返回一个 JSX，通过 babel 进行转义后会得到一个`React.createElement`函数的执行结果，这个执行结果其实就是一个 object，里面有`tagName`、`props`、`type`、`children`等属性，这个 object 就是所谓的虚拟 DOM。
+
+### 优点
+
+- 避免大规模操作真实 DOM 带来的性能开销
+- 规避 XSS
+- 可以跨平台
+
+### 缺点
+
+- 虚拟 DOM 需要存储所有的真实 DOM 的信息，所以内存占用较高
+- 无法进行极致优化
+
+> 虽然可以规避 XSS，但是 React 提供了 dangerousInnerHTML 的 API 可以在不转义的情况下设置文本
+> 虽然虚拟 DOM 在绝大多数情况下可以实现性能优化，但是虚拟 DOM 本身是有成本的，只能无限接近于真实 DOM 操作的性能
+
+## React 的 Diff 算法
+
+由于 React 采用了虚拟 DOM 来提高性能，那 Diff 算法就是提高性能的关键。React 在执行`setState`后，会将真实 DOM 转换为虚拟 DOM，与老的虚拟 DOM 进行比对。因为虚拟 DOM 是一种树形结构，所以可以采用深度优先遍历和广度优先遍历两种算法进行遍历。React 采取的是深度优先遍历，因为广度优先遍历可能会导致生命周期出现问题。但是由于深度优先遍历的时间复杂度为 O(n^3)，所以 React 采用了分治策略，即对树、组件和元素进行分别对比。对于树而言，只会进行同层比较，如果发现节点已经不在了，则会直接将该节点和子节点都删除；对于组件而言，如果组件的 class 一致，默认为相同的树结构，否则为不同的树结构。如果相同，则进行树比对，否则直接进行更新；对于元素而言，React 会根据元素的 key 进行比较。
+
+### Fiber
+
+在 React16 中，React 使用 Fiber 重写了 Diff 逻辑，主要包含 FiberNode 和 FiberTree。FiberNode 是一个双链表的结构，所以可以很方便的找到当前节点的兄弟节点和子节点，因此可以实现 Diff 过程的暂停和回溯。FiberTree 是由 FiberNode 组成的。整个更新过程由`current`和`workInProgress`两株树双缓冲构成，在`workInProgress`树完成更新后，`current`的指针直接指向新树，即可完成更新。
+
+### Preact
+
+将 Diff 算法分为 Fragment、Component 和 DOM 节点三种类型，分别对应 React 的树、组件和元素。但是区别在于 DOM 节点是直接进行真实节点的对比操作。
+
+### Vue
+
+与 React 整体相同。
+
+### 实际开发的注意点
+
+1. 为组件提供 key 以提高元素 diff 的性能和效率
+2. 尽量避免跨层级操作
+3. 使用 shouldComponentUpdate 和 PureComponent 减少 diff
+
+## React 的渲染流程
+
+在 React16 之前，React 的渲染流程依靠 Stack Reconciler，在 React16 之后，React 的渲染流程依靠 Fiber Reconciler。
+
+1. Stack Reconciler
+
+Stack Reconciler 的逻辑是递归与事务，保证了原子性、隔离性和一致性。
+
+2. Fiber Reconciler
+
+Fiber Reconciler 的逻辑是协作式多任务，分为 render 阶段和 commit 阶段，通过 requestIdleCallback api 判断当前 work 完成后是否有优先级更高的 work，如果有则插入 render 阶段。render 阶段是可暂停的，而 commit 阶段是不可暂停和同步执行的。与 Stack Reconciler 不同的是，Fiber Reconciler 是循环遍历进行 diff 的。
+
+对于常规场景而言，Stack Reconciler 和 Fiber Reconciler 的性能相差不大，只有比如动画、画布等对性能要求较高的场景时，Fiber 的性能优势会更大。
+
+### React16 之前为什么 return 不支持数组
+
+因为 React16 之前渲染是通过递归实现的，需要对节点一步步向下递归，所以不支持数组。
+
+## React 渲染异常
+
+1. 预防
+
+- 引入外部库，如 idx
+- 使用 babel 插件支持可选链式调用
+- 使用 TypeScript 支持可选链式调用
+
+2. 兜底
+
+- 使用 ErrorBoundary 高阶组件包裹 UI 组件
+- 通过埋点统计和上报
+
+## 性能优化
+
+1. 衡量指标
+
+- FCP 首次渲染时间
+- TTI 首次可交互时间
+- Page Load 页面加载时间
+- FPS 页面帧率
+- 静态资源及 API 请求成功率
+
+2. 衡量标准
+
+可以通过 chrome 提供的 lighthouse 工具来分析和优化，但是要结合具体应用场景。比如 B 端项目更看重稳定性，所以静态资源及 API 请求成功率的优先级要高于 FCP 的优先级；C 端项目用户对于白屏的忍受度较低，所以 FPC、TTI 的优先级相对会更高。
+
+3. 优化方案
+
+- FCP 可以采用 Loading 提示的方式，也可以采用骨架屏，或者使用 SSR 技术
+- TTI 可以使用异步加载和懒加载的方式，将核心内容同步渲染，非核心内容异步加载，比如图片
+- Page Load 可以使用异步加载和懒加载的方式
+- FPS 主要是对长列表和重复渲染的优化，长列表可以用虚拟滚动的方式优化
+- 静态资源和 API 请求成功率 主要是靠 CDN 提高请求成功率，如果是遇到服务器劫持可以使用 HTTPS
+
+### 重复渲染
+
+首先应该判断是否有必要对重复渲染进行优化，如果项目的体量不大，重复渲染不一定会造成页面卡顿。可以通过 performance 和 React Profiler 来定位问题。
+
+- 使用 React.memo 或者 pureComponent 来减少重复渲染
+- 使用缓存，如 reselect，可以将对象缓存住，而不至于每次生成一个新的对象
+- 使用 immutable.js 或者 immer.js，让对象变为不可变对象
+- 自己在 shouldComponentUpdate 中进行优化
+
+## React hooks
+
+### 使用限制
+
+1. 不能在条件语句、循环语句或嵌套函数中使用 hooks
+2. 只能在函数组件中使用 hooks
+
+因为所有的 hooks 都是存在一个链表上，访问时是通过数组下标进行访问，执行时是顺序执行的，如果在条件语句、循环语句中使用 hooks，会导致数组的下标错位。
+
+### useEffect 和 useLayoutEffect
+
+- useEffect 和 useLayoutEffect 的使用方式和函数签名都是一样的，都可以处理副作用。
+- useEffect 是异步处理副作用，useLayoutEffect 是同步处理副作用，如果有涉及 DOM 样式修改、页面闪烁这些问题，可以使用 useLayoutEffect 替换 useEffect。
+- 由于 useLayoutEffect 是同步处理副作用，应当避免大量计算。
