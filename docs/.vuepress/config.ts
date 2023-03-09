@@ -63,9 +63,13 @@ export default defineUserConfig({
           {
             text: 'Solidity',
             children: [
-              { text: '简述', link: '/solidity/1' },
+              { text: '简述', link: '/solidity/introduction' },
               { text: '类型', link: '/solidity/type' },
             ],
+          },
+          {
+            text: 'Backbone',
+            children: [{ text: '简述', link: '/backbone/introduction' }],
           },
         ],
       },
