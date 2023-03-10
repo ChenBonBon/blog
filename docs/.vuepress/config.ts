@@ -69,7 +69,10 @@ export default defineUserConfig({
           },
           {
             text: 'Backbone',
-            children: [{ text: '简述', link: '/backbone/introduction' }],
+            children: [
+              { text: '简述', link: '/backbone/introduction' },
+              { text: 'Event', link: '/backbone/event' },
+            ],
           },
         ],
       },
