@@ -161,3 +161,70 @@ $('#addBtn').click(function (e) {
 ```
 
 上述代码定义了两个对象`user`和`admin`，`user`绑定了事件`printName`，`admin`监听`user`的`printName`事件是否触发。点击`printBtn`会输出`BonBon`和`user print name`，点击`addBtn`只会输出`29`。
+
+## `object.stopListening(other, event, callback)`
+
+```javascript
+const user = _.extend({ name: 'BonBon', age: 29 }, Backbone.Events);
+const admin = _.extend({}, Backbone.Events);
+
+function printName() {
+  console.log(this.name);
+}
+
+function printAge() {
+  console.log(this.age);
+}
+
+function _print() {
+  console.log('start listen to user');
+}
+
+user.on('printName', printName);
+user.on('printAge', printAge);
+admin.listenTo(user, 'printName', _print);
+
+$('#printBtn').click(function (e) {
+  e.preventDefault();
+  user.trigger('printName');
+});
+
+$('#addBtn').click(function (e) {
+  e.preventDefault();
+  admin.stopListening(user, 'printName');
+});
+```
+
+与`object.listenTo`相对，停止对某个对象某个事件的监听。
+
+## `object.listenToOnce(other, event, callback)`
+
+```javascript
+const user = _.extend({ name: 'BonBon', age: 29 }, Backbone.Events);
+const admin = _.extend({}, Backbone.Events);
+
+function printName() {
+  console.log(this.name);
+}
+
+function printAge() {
+  console.log(this.age);
+}
+
+user.on('printName', printName);
+user.on('printAge', printAge);
+admin.listenTo(user, 'printName', () => {
+  console.log('user print name');
+});
+admin.listenToOnce(user, 'printAge', () => {
+  console.log('user print age');
+});
+
+$('#printBtn').click(function (e) {
+  e.preventDefault();
+  user.trigger('printName');
+  user.trigger('printAge');
+});
+```
+
+与`listenTo`类似，但是只触发一次。
