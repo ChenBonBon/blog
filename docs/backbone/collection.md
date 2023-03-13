@@ -348,3 +348,273 @@ user.shift();
 
 console.log(JSON.stringify(user));
 ```
+
+## `collection.slice(begin, end)`
+
+返回从 begin 到 end 的 collection 浅拷贝。
+
+```javascript
+const UserModel = Backbone.Model.extend({});
+
+const user1 = new UserModel({
+  name: 'BonBon',
+  age: 29,
+});
+
+const user2 = new UserModel({
+  name: 'Karen',
+  age: 28,
+});
+
+const user3 = new UserModel({
+  name: 'Aki',
+  age: 29,
+});
+
+const user4 = new UserModel({
+  name: 'Karsa',
+  age: 28,
+});
+
+const UserCollection = Backbone.Collection.extend({
+  initialize: function () {
+    console.log('User collection is initialized');
+  },
+});
+
+const user = new UserCollection([user1, user2, user3, user4]);
+
+console.log(JSON.stringify(user.slice(1, 3)));
+```
+
+上述代码输出为`[{"name":"Karen","age":28},{"name":"Aki","age":29}]`，user 在`slice`之后长度依然为 4.
+
+## `collection.length`
+
+可以获取集合中 model 的长度。
+
+## `collection.comparator`
+
+collection 默认没有`comparator`属性，可以为 collection 设置一个`comparator`，让添加进 collection 的 model 按照`comparator`指定的属性排序。
+
+## `collection.sort`
+
+强制 collection 重新排序，需要指定`comparator`属性。
+
+> 当指定`comparator`属性时，添加进 collection 时会自动排序，但是可以指定`sort: false`让添加进 collection 时不自动排序，通过`sort`方法手动排序。
+
+```javascript
+const UserModel = Backbone.Model.extend({});
+
+const user1 = new UserModel({
+  name: 'BonBon',
+  age: 29,
+});
+
+const user2 = new UserModel({
+  name: 'Karen',
+  age: 28,
+});
+
+const user3 = new UserModel({
+  name: 'Aki',
+  age: 18,
+});
+
+const user4 = new UserModel({
+  name: 'Karsa',
+  age: 20,
+});
+
+const UserCollection = Backbone.Collection.extend({
+  initialize: function () {
+    console.log('User collection is initialized');
+  },
+  comparator: 'age',
+});
+
+const user = new UserCollection([user1, user2, user3, user4], { sort: false });
+
+console.log(JSON.stringify(user));
+
+document.getElementById('btn').addEventListener(
+  'click',
+  () => {
+    user.sort();
+    console.log(JSON.stringify(user));
+  },
+  false
+);
+```
+
+上述代码会根据`age`从小到大排序。输出为`[{"name":"BonBon","age":29},{"name":"Karen","age":28},{"name":"Aki","age":18},{"name":"Karsa","age":20}]`，点击按钮后输出为`[{"name":"Aki","age":18},{"name":"Karsa","age":20},{"name":"Karen","age":28},{"name":"BonBon","age":29}]`。
+
+## `collection.pluck(attribute)`
+
+从集合中获取所有模型等某个属性的集合，如果某个 Model 不存在该属性，会返回 undefined。
+
+```javascript
+const UserModel = Backbone.Model.extend({});
+
+const user1 = new UserModel({
+  name: 'BonBon',
+  age: 29,
+});
+
+const user2 = new UserModel({
+  name: 'Karen',
+  age: 28,
+});
+
+const user3 = new UserModel({
+  name: 'Aki',
+  age: 18,
+});
+
+const user4 = new UserModel({
+  name: 'Karsa',
+  age: 20,
+});
+
+const UserCollection = Backbone.Collection.extend({
+  initialize: function () {
+    console.log('User collection is initialized');
+  },
+  comparator: 'age',
+});
+
+const user = new UserCollection([user1, user2, user3, user4]);
+
+console.log(user.pluck('name'));
+```
+
+## `collection.where(attribute)`
+
+可以对集合中的模型的属性进行筛选，返回符合条件的集合。
+
+## `collection.findWhere(attribute)`
+
+与`collection.where`类似，但是只返回符合条件的第一个模型。
+
+```javascript
+const UserModel = Backbone.Model.extend({});
+
+const user1 = new UserModel({
+  name: 'BonBon',
+  age: 29,
+  company: 'aaa',
+});
+
+const user2 = new UserModel({
+  name: 'Karen',
+  age: 28,
+  company: 'aaa',
+});
+
+const user3 = new UserModel({
+  name: 'Aki',
+  age: 18,
+  company: 'bbb',
+});
+
+const user4 = new UserModel({
+  name: 'Karsa',
+  age: 20,
+  company: 'ccc',
+});
+
+const UserCollection = Backbone.Collection.extend({
+  initialize: function () {
+    console.log('User collection is initialized');
+  },
+  comparator: 'age',
+});
+
+const user = new UserCollection([user1, user2, user3, user4]);
+
+console.log(
+  JSON.stringify(
+    user.where({
+      company: 'aaa',
+    })
+  ),
+  JSON.stringify(user.findWhere({ company: 'aaa' }))
+);
+```
+
+## `collection.url`
+
+设置或获取 collection 的 url。
+
+## `collection.clone`
+
+```javascript
+cconst UserModel = Backbone.Model.extend({});
+
+const user1 = new UserModel({
+  name: "BonBon",
+  age: 29,
+  company: "aaa",
+});
+
+const UserCollection = Backbone.Collection.extend({
+  initialize: function () {
+    console.log("User collection is initialized");
+  },
+});
+
+const user = new UserCollection([user1]);
+
+const clonedUser = user.clone();
+
+console.log(clonedUser);
+
+```
+
+上述代码`clone`方法会返回一个与被克隆实例相同属性的新实例。
+
+## `collection.mixin`
+
+可以为 collection 添加一个方法。
+
+```javascript
+const UserModel = Backbone.Model.extend({});
+
+const user1 = new UserModel({
+  name: 'BonBon',
+  age: 29,
+  company: 'aaa',
+});
+
+const user2 = new UserModel({
+  name: 'Karen',
+  age: 28,
+  company: 'aaa',
+});
+
+Backbone.Collection.mixin({
+  max: function (models, iteratee) {
+    let max = -Infinity;
+    let maxIndex = -1;
+    models.forEach((model, index) => {
+      max = Math.max(max, model.attributes.age);
+      maxIndex = index;
+    });
+
+    return models[maxIndex];
+  },
+});
+
+const UserCollection = Backbone.Collection.extend({
+  initialize: function () {
+    console.log('User collection is initialized');
+  },
+  comparator: 'age',
+});
+
+const user = new UserCollection([user1, user2]);
+
+console.log(JSON.stringify(user.max()));
+```
+
+如上代码所示，使用`collection.mixin`为 collection 添加了一个名为`max`的函数，在每个 collection 的实例中均可调用。
