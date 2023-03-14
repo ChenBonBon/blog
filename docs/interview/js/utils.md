@@ -179,3 +179,42 @@ function throttle(fn, delay, flag) {
 14. 请求最大并发数
 
 15. sleep
+
+16. 获取对象所有私有属性集合
+
+- 使用`for...in...`
+
+优点：兼容性好
+存在问题：
+
+1. 性能较差，会遍历所有私有属性和原型链上的属性，需要通过`Object.hasOwnProperty`进行判断
+2. 对于不可枚举属性和 Symbol 类型的属性会忽略
+
+- 使用`Object.getOwnPropertyNames`结合`Object.getOwnPropertySymbols`
+
+优点：兼容性好
+缺点：代码较长
+
+- 使用`Reflect.ownKeys`
+
+优点：代码简洁
+存在问题：兼容性差
+
+所以综上所述，可以封装一个我们自己的获取对象所有私有属性集合的方法。
+
+```javascript
+function getObjectPropertyKeys(object) {
+  if (Reflect && Reflect.ownKeys) {
+    return Reflect.ownKeys(object);
+  } else {
+    return Object.getOwnPropertyNames(object).concat(
+      Object.getOwnPropertySymbols(object)
+    );
+  }
+}
+
+const arr = [0, 1];
+arr[Symbol('a')] = 10;
+
+getObjectPropertyKeys(arr); // ['0', '1', 'length', Symbol('a')]
+```
