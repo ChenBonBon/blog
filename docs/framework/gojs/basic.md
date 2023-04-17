@@ -50,7 +50,7 @@ diagram.undoManager.isEnabled = true;
 
 上述代码将会创建以下图表：
 
-![](/docs/images/gojs-1-1.png)
+![](../../images/gojs-1-1.png)
 
 你可以通过多种方式与图表进行交互：
 
@@ -172,7 +172,7 @@ import { DoubleTreeLayout } from './path/to/gojs/extensionsJSM/DoubleTreeLayout.
 </script>
 ```
 
-![](/docs/images/gojs-1-2.png)
+![](../../images/gojs-1-2.png)
 
 上述代码实现了如上所示的“Hello World!”案例。
 
