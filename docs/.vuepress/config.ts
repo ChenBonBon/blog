@@ -68,10 +68,25 @@ export default defineUserConfig({
             ],
           },
           {
-            text: 'Backbone',
+            text: '一些框架',
             children: [
-              { text: '简述', link: '/backbone/introduction' },
-              { text: 'Event', link: '/backbone/event' },
+              {
+                text: 'Backbone',
+                children: [
+                  { text: '简述', link: '/framework/backbone/introduction' },
+                  { text: 'Event', link: '/framework/backbone/event' },
+                ],
+              },
+              {
+                text: 'GoJS',
+                children: [
+                  { text: 'GoJS 官方介绍', link: '/framework/gojs/basic' },
+                  {
+                    text: '使用GraphObjects构建Parts',
+                    link: '/framework/gojs/building-parts',
+                  },
+                ],
+              },
             ],
           },
         ],
