@@ -192,4 +192,4 @@ import { DoubleTreeLayout } from './path/to/gojs/extensionsJSM/DoubleTreeLayout.
 
 您可以在 [GoJS 示例](https://gojs.net/latest/samples/index.html)中看到可以构建的各种图表。
 
-在下一个介绍页面中，我们将讨论[构建 GoJS 部件并将它们添加到图表中](/docs/framework/gojs/building-parts.md)。
+在下一个介绍页面中，我们将讨论[构建 GoJS 部件并将它们添加到图表中](./building-parts.md)。
