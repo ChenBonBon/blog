@@ -107,6 +107,10 @@ rustup toolchain list
 rustup override set nightly
 ```
 
+## rustfmt
+
+类似于 `golang` 中的 `gofmt`，Rust 也提供了自己的格式化命令。您可以通过使用 `rustfmt [file_name]` 的方式来格式化某个文件以及其中引用的其他文件。
+
 ## 常见问题
 
 1. 依赖安装慢
@@ -176,4 +180,18 @@ rustup override set nightly
 
    ```bash
    export CARGO_HTTP_MULTIPLEXING=false
+   ```
+
+4. rustfmt 报错
+
+   在使用 `rustfmt` 格式化带有 `async` 函数的文件时，有时候会出现以下报错：
+
+   ```bash
+   `async fn` is not permitted in Rust 2015
+   ```
+
+   从报错可以看出，是由于版本问题导致的报错。我们需要在项目中创建一个 `rustfmt.toml` 文件，并在其中写入以下内容：
+
+   ```toml
+   edition = "2021"
    ```
