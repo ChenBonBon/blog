@@ -60,17 +60,6 @@ export default defineUserConfig({
               { text: 'React', link: '/interview/js/react' },
             ],
           },
-          {
-            text: 'Solidity',
-            children: [
-              { text: '简述', link: '/solidity/introduction' },
-              { text: '类型', link: '/solidity/type' },
-            ],
-          },
-          {
-            text: 'Rust',
-            children: [{ text: '安装', link: '/rust/install' }],
-          },
         ],
       },
       {
@@ -94,6 +83,17 @@ export default defineUserConfig({
             ],
           },
         ],
+      },
+      {
+        text: 'Solidity',
+        children: [
+          { text: '简述', link: '/solidity/introduction' },
+          { text: '类型', link: '/solidity/type' },
+        ],
+      },
+      {
+        text: 'Rust',
+        children: [{ text: '安装', link: '/rust/install' }],
       },
     ],
     themePlugins: {
