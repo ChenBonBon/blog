@@ -107,7 +107,7 @@ rustup toolchain list
 rustup override set nightly
 ```
 
-## 疑难问题
+## 常见问题
 
 1. 依赖安装慢
 
@@ -161,3 +161,19 @@ rustup override set nightly
    ```
 
    上述命令会删除 `Cargo` 的缓存，这时运行 `cargo metadata` 可以很快获取 `metadata`，这时重启 VSCode 即可跳过 `rust-analyzer` 插件 `fetch metadata` 阶段。
+
+3. 依赖安装出错
+
+   ```bash
+   **error****:** failed to download from `https://crates.io/api/v1/crates/zstd-sys/2.0.7+zstd.1.5.4/download`
+
+   Caused by:
+
+   [2] Failed initialization ([CONN-1-0] send: no filter connected)
+   ```
+
+   有时候执行 `cargo run`、`cargo metadata` 或 `cargo check` 等命令时会出现以下报错，推测是由于代理问题。可以在 `~/.zshrc` 或 `~/.bashrc` 中添加以下代码：
+
+   ```bash
+   export CARGO_HTTP_MULTIPLEXING=false
+   ```
