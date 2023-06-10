@@ -67,6 +67,10 @@ export default defineUserConfig({
               { text: '类型', link: '/solidity/type' },
             ],
           },
+          {
+            text: 'Rust',
+            children: [{ text: '安装', link: '/rust/install' }],
+          },
         ],
       },
       {
